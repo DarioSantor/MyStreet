@@ -19,15 +19,18 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        // forma de dar cor diferente aos item do navigation bar
+        navigationController?.navigationBar.tintColor = .label
         
         let action = UIAction() {_ in
-            userHasAuth = true
+            localizationAuthorization = true
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
         let registerButton = UIButton(type: .system, primaryAction: action)
         registerButton.backgroundColor = .systemBlue
         registerButton.setTitle("REGISTAR", for: .normal)
-        registerButton.setTitleColor(UIColor.black, for: .normal)
+        registerButton.setTitleColor(UIColor.label, for: .normal)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         registerButton.layer.cornerRadius = 8
         
         let items = [
@@ -52,35 +55,35 @@ class RegisterViewController: UIViewController {
             logo.widthAnchor.constraint(equalToConstant: 150),
             logo.heightAnchor.constraint(equalToConstant: 150),
             
-            firstNameRegisterField.widthAnchor.constraint(equalToConstant: 317),
             firstNameRegisterField.topAnchor.constraint(equalTo: logo.bottomAnchor,constant: 40),
-            firstNameRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            firstNameRegisterField.heightAnchor.constraint(equalToConstant: 52),
+            firstNameRegisterField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            firstNameRegisterField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            firstNameRegisterField.heightAnchor.constraint(equalToConstant: 40),
 
             lastNameRegisterField.topAnchor.constraint(equalTo: firstNameRegisterField.bottomAnchor,constant: 20),
-            lastNameRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            lastNameRegisterField.widthAnchor.constraint(equalToConstant: 317),
-            lastNameRegisterField.heightAnchor.constraint(equalToConstant: 52),
+            lastNameRegisterField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            lastNameRegisterField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            lastNameRegisterField.heightAnchor.constraint(equalToConstant: 40),
 
             emailRegisterField.topAnchor.constraint(equalTo: lastNameRegisterField.bottomAnchor,constant: 20),
-            emailRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emailRegisterField.widthAnchor.constraint(equalToConstant: 317),
-            emailRegisterField.heightAnchor.constraint(equalToConstant: 52),
+            emailRegisterField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailRegisterField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailRegisterField.heightAnchor.constraint(equalToConstant: 40),
 
             passwordRegisterField.topAnchor.constraint(equalTo: emailRegisterField.bottomAnchor,constant: 20),
-            passwordRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordRegisterField.widthAnchor.constraint(equalToConstant: 317),
-            passwordRegisterField.heightAnchor.constraint(equalToConstant: 52),
+            passwordRegisterField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            passwordRegisterField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            passwordRegisterField.heightAnchor.constraint(equalToConstant: 40),
 
             confirmPassRegisterField.topAnchor.constraint(equalTo: passwordRegisterField.bottomAnchor,constant: 20),
-            confirmPassRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            confirmPassRegisterField.widthAnchor.constraint(equalToConstant: 317),
-            confirmPassRegisterField.heightAnchor.constraint(equalToConstant: 52),
+            confirmPassRegisterField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            confirmPassRegisterField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            confirmPassRegisterField.heightAnchor.constraint(equalToConstant: 40),
             
             registerButton.topAnchor.constraint(equalTo: confirmPassRegisterField.bottomAnchor,constant: 60),
-            registerButton.widthAnchor.constraint(equalToConstant: 217),
-            registerButton.heightAnchor.constraint(equalToConstant: 52),
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            registerButton.heightAnchor.constraint(equalToConstant: 40),
         
         ])
     }

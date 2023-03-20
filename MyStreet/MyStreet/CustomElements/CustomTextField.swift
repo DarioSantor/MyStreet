@@ -29,7 +29,7 @@ class CustomTextField: UITextField {
         self.returnKeyType = .done
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
-        self.font = UIFont.systemFont(ofSize: 22)
+        self.font = UIFont.systemFont(ofSize: 20)
         
         self.leftViewMode = .always
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: self.frame.size.height))

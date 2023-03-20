@@ -12,16 +12,15 @@ class LoginViewController: UIViewController {
     
     private let logo = UIImageView(image: UIImage(named: "logo"))
     
-    
+    private var isUserAdmin: Bool = false
     private let emailLoginField = CustomTextField(fieldType: .email)
     private let passwordLoginField = CustomTextField(fieldType: .password)
-    private let loginButton = CustomButton(title: "Login", bgColor: .systemGreen)
-    private let registerButton = CustomButton(title: "Registar", bgColor: .systemBlue)
+    private let loginButton = CustomButton(title: "LOGIN", bgColor: .systemGreen)
+    private let registerButton = CustomButton(title: "REGISTAR", bgColor: .systemBlue)
     
     private let registerQuestion: UILabel = {
         let label = UILabel()
         label.text = "Não tem conta?"
-        label.layer.borderWidth = 1
         return label
     }()
 
@@ -29,8 +28,9 @@ class LoginViewController: UIViewController {
         
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        // forma de esconder o back button e texto
+        navigationItem.setHidesBackButton(true, animated: false)
     
-        
         view.addSubview(logo)
         view.addSubview(emailLoginField)
         view.addSubview(passwordLoginField)
@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
         
         addContraints()
         
+        loginButton.addTarget(self, action: #selector(goToMenuVC), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(goToRegisterVC), for: .touchUpInside)
     }
     
@@ -58,30 +59,34 @@ class LoginViewController: UIViewController {
             logo.heightAnchor.constraint(equalToConstant: 250),
 //            
             emailLoginField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 20),
-            emailLoginField.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
-            emailLoginField.widthAnchor.constraint(equalTo: logo.widthAnchor),
-            emailLoginField.heightAnchor.constraint(equalToConstant: 50),
+            emailLoginField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailLoginField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailLoginField.heightAnchor.constraint(equalToConstant: 40),
             
             passwordLoginField.topAnchor.constraint(equalTo: emailLoginField.bottomAnchor, constant: 20),
-            passwordLoginField.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
-            passwordLoginField.widthAnchor.constraint(equalTo: logo.widthAnchor),
-            passwordLoginField.heightAnchor.constraint(equalToConstant: 50),
+            passwordLoginField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            passwordLoginField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            passwordLoginField.heightAnchor.constraint(equalToConstant: 40),
             
             loginButton.topAnchor.constraint(equalTo: passwordLoginField.bottomAnchor, constant: 20),
-            loginButton.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
-            loginButton.widthAnchor.constraint(equalTo: logo.widthAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            loginButton.heightAnchor.constraint(equalToConstant: 40),
             
             registerQuestion.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
             registerQuestion.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
             
             registerButton.topAnchor.constraint(equalTo: registerQuestion.bottomAnchor, constant: 5),
-            registerButton.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
-            registerButton.widthAnchor.constraint(equalTo: logo.widthAnchor),
-            registerButton.heightAnchor.constraint(equalToConstant: 50),
+            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            registerButton.heightAnchor.constraint(equalToConstant: 40),
             
             
         ])
+    }
+    
+    @objc func goToMenuVC() {
+        navigationController?.pushViewController(isUserAdmin ? UserMenuViewController() : UserMenuViewController(), animated: true)
     }
     
     @objc func goToRegisterVC() {

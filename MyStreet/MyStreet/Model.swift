@@ -7,4 +7,4 @@
 
 import Foundation
 
-var userHasAuth = false
+var localizationAuthorization = false
