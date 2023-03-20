@@ -7,7 +7,7 @@
 
 import Foundation
 
-var userHasAuth = false
+var localizationAuthorization = false
 
 struct Ocurrence {
     let description: String
