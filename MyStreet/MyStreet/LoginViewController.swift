@@ -85,10 +85,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func goToRegisterVC() {
-        navigationController?.pushViewController(LocalizationAuthViewController(), animated: true)
+        navigationController?.pushViewController(RegisterViewController(), animated: true)
     }
-    
-
-
 }
 
