@@ -27,7 +27,7 @@ class LocalizationAuthViewController: UIViewController {
         
         let action = UIAction() {_ in
             // guardar este dados nos user preferences
-            userHasAuth = true
+            localizationAuthorization = true
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
         
