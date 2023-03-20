@@ -17,15 +17,12 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondarySystemBackground
-//        label.layer.borderWidth = 1
-//        label.backgroundColor = .secondarySystemBackground
         label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
     private let locationLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-//        label.layer.borderWidth = 1
         label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
@@ -33,9 +30,6 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-
-//        backgroundColor = .systemBackground
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +42,6 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
         bottomView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         bottomView.layer.cornerRadius = 14
         bottomView.backgroundColor = .secondarySystemBackground
-        
         
         
         addSubview(topView)
@@ -88,16 +81,9 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
         
 
     }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
     
     func configure(occurence: Ocurrence) {
         descriptionLabel.text = occurence.description
         locationLabel.text = occurence.location
     }
-
 }

@@ -30,7 +30,7 @@ class UserMenuViewController: UIViewController {
         reportButton.translatesAutoresizingMaskIntoConstraints = false
         
         let allIssuesAction = UIAction() {_ in
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            self.navigationController?.pushViewController(OccurrenceListViewController(), animated: true)
         }
         let allIssuesButton = UIButton(type: .system, primaryAction: allIssuesAction)
         allIssuesButton.backgroundColor = .secondarySystemBackground

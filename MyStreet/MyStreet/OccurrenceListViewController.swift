@@ -24,15 +24,12 @@ class OccurrenceListViewController: UIViewController {
         view.addSubview(occurrenceTableView)
         
         occurrenceTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
+        occurrenceTableView.showsVerticalScrollIndicator = false
         NSLayoutConstraint.activate([
-            occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
             occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor), 
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
         ])
         
     }

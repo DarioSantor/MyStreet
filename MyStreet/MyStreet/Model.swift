@@ -7,7 +7,8 @@
 
 import Foundation
 
-var localizationAuthorization = false
+var localizationAuthorization = true
+
 
 struct Ocurrence {
     let description: String
