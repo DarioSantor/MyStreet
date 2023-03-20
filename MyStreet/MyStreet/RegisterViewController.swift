@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .label
         
         let action = UIAction() {_ in
-            userHasAuth = true
+            localizationAuthorization = true
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
         let registerButton = UIButton(type: .system, primaryAction: action)
