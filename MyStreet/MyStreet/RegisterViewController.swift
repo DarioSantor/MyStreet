@@ -9,123 +9,79 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+    private let logo = UIImageView(image: UIImage(named: "logo"))
+    private let firstNameRegisterField = CustomTextField(fieldType: .firstName)
+    private let lastNameRegisterField = CustomTextField(fieldType: .lastName)
+    private let emailRegisterField = CustomTextField(fieldType: .email)
+    private let passwordRegisterField = CustomTextField(fieldType: .password)
+    private let confirmPassRegisterField = CustomTextField(fieldType: .confirmPass)
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        let logo = UIImageView(image: UIImage(named: "logo"))
-        let firstName = UITextField()
-        let lastName = UITextField()
-        let email = UITextField()
-        let password = UITextField()
-        let confirmPassword = UITextField()
-        let registerBtn = UIButton()
         
-        firstName.placeholder = "  Primeiro Nome"
-        lastName.placeholder = "  Último Nome"
-        email.placeholder = "  Email"
-        password.placeholder = "  Password"
-        confirmPassword.placeholder = "  Confirmar Password"
-                
-        registerBtn.backgroundColor = .blue
-        registerBtn.setTitle("REGISTAR", for: .normal)
-        registerBtn.layer.cornerRadius = 10
-
+        let action = UIAction() {_ in
+            userHasAuth = true
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        }
+        let registerButton = UIButton(type: .system, primaryAction: action)
+        registerButton.backgroundColor = .systemBlue
+        registerButton.setTitle("REGISTAR", for: .normal)
+        registerButton.setTitleColor(UIColor.black, for: .normal)
+        registerButton.layer.cornerRadius = 8
         
+        let items = [
+            logo,
+            firstNameRegisterField,
+            lastNameRegisterField,
+            emailRegisterField,
+            passwordRegisterField,
+            confirmPassRegisterField,
+            registerButton
+        ]
         
-        firstName.layer.cornerRadius = 10
-        
-        lastName.layer.cornerRadius = 10
-        
-        email.layer.cornerRadius = 10
-        
-        password.layer.cornerRadius = 10
-        
-        confirmPassword.layer.cornerRadius = 10
-        
-        firstName.layer.borderWidth = 1.0
-        firstName.layer.borderColor = UIColor.gray.cgColor
-
-        lastName.layer.borderWidth = 1.0
-        lastName.layer.borderColor = UIColor.gray.cgColor
-
-        email.layer.borderWidth = 1.0
-        email.layer.borderColor = UIColor.gray.cgColor
-
-        password.layer.borderWidth = 1.0
-        password.layer.borderColor = UIColor.gray.cgColor
-
-        confirmPassword.layer.borderWidth = 1.0
-        confirmPassword.layer.borderColor = UIColor.gray.cgColor
-        
-        
-        
-        
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        firstName.translatesAutoresizingMaskIntoConstraints = false
-        lastName.translatesAutoresizingMaskIntoConstraints = false
-        email.translatesAutoresizingMaskIntoConstraints = false
-        password.translatesAutoresizingMaskIntoConstraints = false
-        confirmPassword.translatesAutoresizingMaskIntoConstraints = false
-        registerBtn.translatesAutoresizingMaskIntoConstraints = false
-
-        
-        view.addSubview(logo)
-        view.addSubview(firstName)
-        view.addSubview(lastName)
-        view.addSubview(email)
-        view.addSubview(password)
-        view.addSubview(confirmPassword)
-        view.addSubview(registerBtn)
-        
-        
-        
-        
-        
+        for item in items {
+            item.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(item)
+        }
+    
         NSLayoutConstraint.activate([
+            
             logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logo.widthAnchor.constraint(equalToConstant: 150),
             logo.heightAnchor.constraint(equalToConstant: 150),
             
-            firstName.widthAnchor.constraint(equalToConstant: 317),
-            firstName.topAnchor.constraint(equalTo: logo.bottomAnchor,constant: 40),
-            firstName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            firstName.heightAnchor.constraint(equalToConstant: 52),
+            firstNameRegisterField.widthAnchor.constraint(equalToConstant: 317),
+            firstNameRegisterField.topAnchor.constraint(equalTo: logo.bottomAnchor,constant: 40),
+            firstNameRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            firstNameRegisterField.heightAnchor.constraint(equalToConstant: 52),
 
+            lastNameRegisterField.topAnchor.constraint(equalTo: firstNameRegisterField.bottomAnchor,constant: 20),
+            lastNameRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lastNameRegisterField.widthAnchor.constraint(equalToConstant: 317),
+            lastNameRegisterField.heightAnchor.constraint(equalToConstant: 52),
+
+            emailRegisterField.topAnchor.constraint(equalTo: lastNameRegisterField.bottomAnchor,constant: 20),
+            emailRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailRegisterField.widthAnchor.constraint(equalToConstant: 317),
+            emailRegisterField.heightAnchor.constraint(equalToConstant: 52),
+
+            passwordRegisterField.topAnchor.constraint(equalTo: emailRegisterField.bottomAnchor,constant: 20),
+            passwordRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordRegisterField.widthAnchor.constraint(equalToConstant: 317),
+            passwordRegisterField.heightAnchor.constraint(equalToConstant: 52),
+
+            confirmPassRegisterField.topAnchor.constraint(equalTo: passwordRegisterField.bottomAnchor,constant: 20),
+            confirmPassRegisterField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            confirmPassRegisterField.widthAnchor.constraint(equalToConstant: 317),
+            confirmPassRegisterField.heightAnchor.constraint(equalToConstant: 52),
             
-            lastName.topAnchor.constraint(equalTo: firstName.bottomAnchor,constant: 20),
-            lastName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            lastName.widthAnchor.constraint(equalToConstant: 317),
-            lastName.heightAnchor.constraint(equalToConstant: 52),
-
-
-            email.topAnchor.constraint(equalTo: lastName.bottomAnchor,constant: 20),
-            email.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            email.widthAnchor.constraint(equalToConstant: 317),
-            email.heightAnchor.constraint(equalToConstant: 52),
-
-
-            password.topAnchor.constraint(equalTo: email.bottomAnchor,constant: 20),
-            password.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            password.widthAnchor.constraint(equalToConstant: 317),
-            password.heightAnchor.constraint(equalToConstant: 52),
-
-
-            confirmPassword.topAnchor.constraint(equalTo: password.bottomAnchor,constant: 20),
-            confirmPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            confirmPassword.widthAnchor.constraint(equalToConstant: 317),
-            confirmPassword.heightAnchor.constraint(equalToConstant: 52),
-            
-            registerBtn.topAnchor.constraint(equalTo: confirmPassword.bottomAnchor,constant: 60),
-            registerBtn.widthAnchor.constraint(equalToConstant: 217),
-            registerBtn.heightAnchor.constraint(equalToConstant: 52),
-            registerBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-
-
+            registerButton.topAnchor.constraint(equalTo: confirmPassRegisterField.bottomAnchor,constant: 60),
+            registerButton.widthAnchor.constraint(equalToConstant: 217),
+            registerButton.heightAnchor.constraint(equalToConstant: 52),
+            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        
         ])
-
-
     }
-
-
 }

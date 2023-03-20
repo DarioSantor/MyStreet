@@ -12,6 +12,9 @@ class CustomTextField: UITextField {
     enum CustomTextFieldType {
         case email
         case password
+        case firstName
+        case lastName
+        case confirmPass
     }
     
     private let authFieldType: CustomTextFieldType
@@ -34,13 +37,25 @@ class CustomTextField: UITextField {
         
         switch fieldType {
         case .email:
-            self.placeholder = "Email Adress"
+            self.placeholder = "Email"
             self.keyboardType = .emailAddress
             self.textContentType = .emailAddress
         case .password:
             self.placeholder = "Password"
             self.textContentType = .oneTimeCode
             self.isSecureTextEntry = true
+        case .confirmPass:
+            self.placeholder = "Confirm Password"
+            self.textContentType = .oneTimeCode
+            self.isSecureTextEntry = true
+        case .firstName:
+            self.placeholder = "Primeiro Nome"
+            self.keyboardType = .alphabet
+            self.textContentType = .givenName
+        case .lastName:
+            self.placeholder = "Último Nome"
+            self.keyboardType = .alphabet
+            self.textContentType = .familyName
         }
     }
     
