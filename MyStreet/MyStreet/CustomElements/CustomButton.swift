@@ -12,7 +12,7 @@ class CustomButton: UIButton {
     init(title: String, bgColor: UIColor) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
-        self.setTitleColor(UIColor.black, for: .normal)
+        self.setTitleColor(UIColor.label, for: .normal)
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true // ??
         self.backgroundColor = bgColor
