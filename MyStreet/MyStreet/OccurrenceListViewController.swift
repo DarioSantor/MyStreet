@@ -7,25 +7,51 @@
 
 import UIKit
 
-class OcurrencyListViewController: UIViewController {
+class OccurrenceListViewController: UIViewController {
     
-    private let issueTableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
+    private let occurrenceTableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .yellow
+        view.backgroundColor = .systemBackground
+
+        
+        occurrenceTableView.delegate = self
+        occurrenceTableView.dataSource = self
+        occurrenceTableView.register(CustomOcurrencetableViewCellTableViewCell.self, forCellReuseIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier)
+        
+        view.addSubview(occurrenceTableView)
+        
+        occurrenceTableView.translatesAutoresizingMaskIntoConstraints = false
         
         
+        
+        NSLayoutConstraint.activate([
+            occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor), 
+            occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
+            occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+        ])
         
     }
 }
 
-Ocurency
+extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        120
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        occurrencies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
+        cell.configure(occurence: occurrencies[indexPath.row])
+        return cell
+    }
+}

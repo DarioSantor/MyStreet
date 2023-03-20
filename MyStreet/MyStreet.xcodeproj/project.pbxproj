@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0AB64A29C8CAED006B276E /* OccurrenceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */; };
+		2C0AB64C29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AB64B29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift */; };
 		2CA84FE829C63A5C006A0341 /* LocalizationAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */; };
 		2CA84FE929C63A5C006A0341 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE629C63A5B006A0341 /* Model.swift */; };
 		2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE729C63A5C006A0341 /* LoginViewController.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceListViewController.swift; sourceTree = "<group>"; };
+		2C0AB64B29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOcurrencetableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationAuthViewController.swift; sourceTree = "<group>"; };
 		2CA84FE629C63A5B006A0341 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2CA84FE729C63A5C006A0341 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 			children = (
 				2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */,
 				2CE26F7329C7D54700A49ABB /* CustomButton.swift */,
+				2C0AB64B29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 				A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */,
 				F20E17F129C8CA290068B704 /* UserMenuViewController.swift */,
 				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
+				2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
 				2CA84FE629C63A5B006A0341 /* Model.swift */,
 				F2EA989529BF990300AF7ECC /* AppDelegate.swift */,
@@ -263,10 +269,12 @@
 				F20E17F229C8CA290068B704 /* UserMenuViewController.swift in Sources */,
 				F20E17F429C8EEBE0068B704 /* ConfirmationViewController.swift in Sources */,
 				A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */,
+				2C0AB64A29C8CAED006B276E /* OccurrenceListViewController.swift in Sources */,
 				F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
 				2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */,
 				2CA84FE929C63A5C006A0341 /* Model.swift in Sources */,
+				2C0AB64C29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
