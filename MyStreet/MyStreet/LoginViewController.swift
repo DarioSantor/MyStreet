@@ -99,6 +99,12 @@ class LoginViewController: UIViewController {
                 return
             }
             print("You're IIIIIINNNNNNNN")
+            guard let uid = result?.user.uid else { return }
+            
+            if uid == ADMIN_UID {
+                self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
+                return
+            }
             self.navigationController?.pushViewController(self.isUserAdmin ? UserMenuViewController() : UserMenuViewController(), animated: true)
         }
 
