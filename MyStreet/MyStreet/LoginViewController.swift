@@ -6,8 +6,8 @@
 //
 
 import UIKit
+import Firebase
 
-///Login View Controller
 class LoginViewController: UIViewController {
     
     private let logo = UIImageView(image: UIImage(named: "logo"))
@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
         
         loginButton.addTarget(self, action: #selector(goToMenuVC), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(goToRegisterVC), for: .touchUpInside)
+
     }
     
     private func addContraints() {
@@ -86,7 +87,21 @@ class LoginViewController: UIViewController {
     }
     
     @objc func goToMenuVC() {
-        navigationController?.pushViewController(isUserAdmin ? UserMenuViewController() : UserMenuViewController(), animated: true)
+        
+        guard let email = self.emailLoginField.text else { return }
+        guard let password = self.passwordLoginField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                
+                // TODO tratamento de erros do servidor
+                print("DEBUG - \(error.localizedDescription)")
+                return
+            }
+            print("You're IIIIIINNNNNNNN")
+            self.navigationController?.pushViewController(self.isUserAdmin ? UserMenuViewController() : UserMenuViewController(), animated: true)
+        }
+
     }
     
     @objc func goToRegisterVC() {

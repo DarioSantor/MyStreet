@@ -6,7 +6,8 @@
 //
 
 import UIKit
-///ghsdgahjdgagshj
+import Firebase
+
 class RegisterViewController: UIViewController {
 
     private let logo = UIImageView(image: UIImage(named: "logo"))
@@ -24,7 +25,37 @@ class RegisterViewController: UIViewController {
         
         let action = UIAction() {_ in
             localizationAuthorization = true
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            
+            // TODO tratamento de aceitação dos valores introduzidos
+            guard let email = self.emailRegisterField.text else { return }
+            guard let password = self.passwordRegisterField.text else { return }
+            guard let firstName = self.firstNameRegisterField.text else { return }
+            guard let lastName = self.lastNameRegisterField.text else { return }
+            
+            // criação do utilizador, por defeito o registo verifica se o email está bem formatado e se
+            // a pass tem pelo menos 6 caracteres
+            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                if let error = error {
+                    
+                    // TODO tratamento de erros do servidor
+                    print("DEBUG - \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG - Successfull Registration")
+                
+                // recebemos o uid atribuido ao utilizador
+                guard let uid = result?.user.uid else { return }
+                
+                // valores para serem guardados na base de dados
+                let values = ["email": email, "firstName": firstName, "lastName": lastName]
+                
+                
+                // guarda os valores
+                REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+                    print("Successfully updated user info")
+                }
+                self.navigationController?.pushViewController(UserMenuViewController(), animated: true)
+            }
         }
         let registerButton = UIButton(type: .system, primaryAction: action)
         registerButton.backgroundColor = .systemBlue

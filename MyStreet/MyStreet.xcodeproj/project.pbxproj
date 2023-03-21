@@ -17,7 +17,6 @@
 		A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */; };
 		F20E17F229C8CA290068B704 /* UserMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E17F129C8CA290068B704 /* UserMenuViewController.swift */; };
 		F20E17F429C8EEBE0068B704 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */; };
-		F20E17F629C8F8000068B704 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20E17F529C8F8000068B704 /* GoogleService-Info.plist */; };
 		F20E17F929C8FA7E0068B704 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F20E17F829C8FA7E0068B704 /* FirebaseAnalytics */; };
 		F20E17FB29C8FA7E0068B704 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F20E17FA29C8FA7E0068B704 /* FirebaseAnalyticsOnDeviceConversion */; };
 		F20E17FD29C8FA7E0068B704 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F20E17FC29C8FA7E0068B704 /* FirebaseAnalyticsSwift */; };
@@ -45,6 +44,8 @@
 		F20E182929C8FA7F0068B704 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F20E182829C8FA7F0068B704 /* FirebaseRemoteConfigSwift */; };
 		F20E182B29C8FA7F0068B704 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F20E182A29C8FA7F0068B704 /* FirebaseStorage */; };
 		F20E182D29C8FA7F0068B704 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = F20E182C29C8FA7F0068B704 /* FirebaseStorageCombine-Community */; };
+		F20E183129C927250068B704 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20E183029C927250068B704 /* GoogleService-Info.plist */; };
+		F20E183429C929A70068B704 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E183329C929A70068B704 /* Constants.swift */; };
 		F2EA989629BF990300AF7ECC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989529BF990300AF7ECC /* AppDelegate.swift */; };
 		F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989729BF990300AF7ECC /* SceneDelegate.swift */; };
 		F2EA989D29BF990300AF7ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2EA989B29BF990300AF7ECC /* Main.storyboard */; };
@@ -63,7 +64,8 @@
 		A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F20E17F129C8CA290068B704 /* UserMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuViewController.swift; sourceTree = "<group>"; };
 		F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
-		F20E17F529C8F8000068B704 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F20E183029C927250068B704 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F20E183329C929A70068B704 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F2EA989229BF990300AF7ECC /* MyStreet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStreet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EA989529BF990300AF7ECC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2EA989729BF990300AF7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 			path = CustomElements;
 			sourceTree = "<group>";
 		};
+		F20E183229C929890068B704 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F20E183329C929A70068B704 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		F2EA988929BF990300AF7ECC = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		F2EA989429BF990300AF7ECC /* MyStreet */ = {
 			isa = PBXGroup;
 			children = (
+				F20E183229C929890068B704 /* Utils */,
 				2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */,
 				2CA84FE729C63A5C006A0341 /* LoginViewController.swift */,
 				A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */,
@@ -154,7 +165,7 @@
 				F2EA989E29BF990500AF7ECC /* Assets.xcassets */,
 				F2EA98A029BF990500AF7ECC /* LaunchScreen.storyboard */,
 				F2EA98A329BF990500AF7ECC /* Info.plist */,
-				F20E17F529C8F8000068B704 /* GoogleService-Info.plist */,
+				F20E183029C927250068B704 /* GoogleService-Info.plist */,
 			);
 			path = MyStreet;
 			sourceTree = "<group>";
@@ -250,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2EA98A229BF990500AF7ECC /* LaunchScreen.storyboard in Resources */,
-				F20E17F629C8F8000068B704 /* GoogleService-Info.plist in Resources */,
+				F20E183129C927250068B704 /* GoogleService-Info.plist in Resources */,
 				F2EA989F29BF990500AF7ECC /* Assets.xcassets in Resources */,
 				F2EA989D29BF990300AF7ECC /* Main.storyboard in Resources */,
 			);
@@ -270,6 +281,7 @@
 				F20E17F429C8EEBE0068B704 /* ConfirmationViewController.swift in Sources */,
 				A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */,
 				2C0AB64A29C8CAED006B276E /* OccurrenceListViewController.swift in Sources */,
+				F20E183429C929A70068B704 /* Constants.swift in Sources */,
 				F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
 				2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */,
