@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
         let action = UIAction() {_ in
             localizationAuthorization = true
             
-            // TODO tratamento de aceitação dos valores introduzidos
+            // TODO: tratamento de aceitação dos valores introduzidos
             guard let email = self.emailRegisterField.text else { return }
             guard let password = self.passwordRegisterField.text else { return }
             guard let firstName = self.firstNameRegisterField.text else { return }
@@ -46,11 +46,14 @@ class RegisterViewController: UIViewController {
                 // recebemos o uid atribuido ao utilizador
                 guard let uid = result?.user.uid else { return }
                 
+                // guarda o uid do user nos userDefaults
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(uid, forKey: "myUID")
+
                 // valores para serem guardados na base de dados
                 let values = ["email": email, "firstName": firstName, "lastName": lastName]
                 
-                
-                // guarda os valores
+                // envia os valores para a BD
                 REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
                     print("Successfully updated user info")
                 }

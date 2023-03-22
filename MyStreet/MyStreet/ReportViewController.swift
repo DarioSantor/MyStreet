@@ -14,7 +14,6 @@ class ReportViewController: UIViewController {
     private let reportFilterField = CustomTextField(fieldType: .reportFilter)
     private let reportDescriptionField = CustomTextField(fieldType: .reportDescription)
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -27,11 +26,31 @@ class ReportViewController: UIViewController {
         let reportImage = UIImageView(image: UIImage())
         reportImage.layer.borderWidth = 1
         
-        let submitBtn = UIButton()
+        let reportAction = UIAction {_ in
+            guard let localization = self.reportLocalizationField.text else { return }
+            guard let title = self.reportTitleField.text else { return }
+            guard let type = self.reportFilterField.text else { return }
+            guard let description = self.reportDescriptionField.text else { return }
+            
+            let values = ["localization": localization, "title": title, "type": type, "description": description]
+            
+            let userDefaults = UserDefaults.standard
+            
+            let uid = userDefaults.object(forKey: "myUID")
+            print("uid-\(uid)")
+            
+            REF_ISSUES.child(uid as! String).updateChildValues(values) { (error, ref) in
+                print("Successfully updated issue info")
+            }
+            self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
+        }
+        
+        let submitBtn = UIButton(type: .system, primaryAction: reportAction)
         submitBtn.setTitle("SUBMETER", for: .normal)
         submitBtn.backgroundColor = .systemBlue
+        submitBtn.setTitleColor(UIColor.label, for: .normal)
         submitBtn.layer.cornerRadius = 8
-        
+        submitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         
         let items = [
             title,
@@ -59,27 +78,23 @@ class ReportViewController: UIViewController {
             reportLocalizationField.heightAnchor.constraint(equalToConstant:40),
             reportLocalizationField.widthAnchor.constraint(equalToConstant:290),
 
-            
             locationImg.topAnchor.constraint(equalTo: title.bottomAnchor, constant:20),
             locationImg.leadingAnchor.constraint(equalTo: reportLocalizationField.trailingAnchor,constant:10),
             locationImg.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             locationImg.bottomAnchor.constraint(equalTo: reportLocalizationField.bottomAnchor),
             locationImg.heightAnchor.constraint(equalToConstant:40),
 
-        
             reportTitleField.topAnchor.constraint(equalTo: reportLocalizationField.bottomAnchor,constant:10),
             reportTitleField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportTitleField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             reportTitleField.bottomAnchor.constraint(equalTo: reportFilterField.topAnchor,constant:-10),
             reportTitleField.heightAnchor.constraint(equalToConstant:40),
-
             
             reportFilterField.topAnchor.constraint(equalTo: reportTitleField.bottomAnchor),
             reportFilterField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportFilterField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             reportFilterField.bottomAnchor.constraint(equalTo: reportDescriptionField.topAnchor,constant:-10),
             reportFilterField.heightAnchor.constraint(equalToConstant:40),
-
             
             reportDescriptionField.topAnchor.constraint(equalTo: reportFilterField.bottomAnchor,constant:40),
             reportDescriptionField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
@@ -95,11 +110,6 @@ class ReportViewController: UIViewController {
             submitBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             submitBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
 
-
-        
-        
-        
-        
         ])
         
     }

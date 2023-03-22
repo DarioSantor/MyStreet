@@ -165,6 +165,7 @@
 				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
 				2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */,
 				F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */,
+				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
 				2CA84FE629C63A5B006A0341 /* Model.swift */,
 				F2EA989529BF990300AF7ECC /* AppDelegate.swift */,
@@ -174,7 +175,6 @@
 				F2EA98A029BF990500AF7ECC /* LaunchScreen.storyboard */,
 				F2EA98A329BF990500AF7ECC /* Info.plist */,
 				F20E183029C927250068B704 /* GoogleService-Info.plist */,
-				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
 			);
 			path = MyStreet;
 			sourceTree = "<group>";

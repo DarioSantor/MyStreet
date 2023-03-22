@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 
-                // TODO tratamento de erros do servidor
+                // TODO: tratamento de erros do servidor
                 print("DEBUG - \(error.localizedDescription)")
                 return
             }
