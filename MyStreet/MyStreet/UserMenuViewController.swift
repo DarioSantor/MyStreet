@@ -19,7 +19,7 @@ class UserMenuViewController: UIViewController {
         logo.translatesAutoresizingMaskIntoConstraints = false
         
         let actionReportButton = UIAction() {_ in
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            self.navigationController?.pushViewController(ReportViewController(), animated: true)
         }
         let reportButton = UIButton(type: .system, primaryAction: actionReportButton)
         reportButton.backgroundColor = .secondarySystemBackground

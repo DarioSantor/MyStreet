@@ -15,6 +15,11 @@ class CustomTextField: UITextField {
         case firstName
         case lastName
         case confirmPass
+        case location
+        case reportTitle
+        case reportFilter
+        case reportDescription
+
     }
     
     private let authFieldType: CustomTextFieldType
@@ -56,6 +61,18 @@ class CustomTextField: UITextField {
             self.placeholder = "Último Nome"
             self.keyboardType = .alphabet
             self.textContentType = .familyName
+        case .location:
+            self.placeholder = "Localização"
+            self.keyboardType = .alphabet
+        case .reportTitle:
+            self.placeholder = "Título Problema"
+            self.keyboardType = .alphabet
+        case .reportFilter:
+            self.placeholder = "Tipo Problema"
+            self.keyboardType = .alphabet
+        case .reportDescription:
+            self.placeholder = "Descrição"
+            self.keyboardType = .alphabet
         }
     }
     
