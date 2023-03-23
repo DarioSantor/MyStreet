@@ -37,7 +37,6 @@ class ReportViewController: UIViewController {
             let userDefaults = UserDefaults.standard
             
             let uid = userDefaults.object(forKey: "myUID")
-            print("uid-\(uid)")
             
             REF_ISSUES.child(uid as! String).updateChildValues(values) { (error, ref) in
                 print("Successfully updated issue info")

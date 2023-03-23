@@ -49,6 +49,8 @@
 		F20E183429C929A70068B704 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E183329C929A70068B704 /* Constants.swift */; };
 		F20E183929C9A8CF0068B704 /* AdminFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */; };
 		F20E184D29CB952D0068B704 /* OccurrenceFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */; };
+		F252F45929CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */; };
+		F252F45D29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */; };
 		F2EA989629BF990300AF7ECC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989529BF990300AF7ECC /* AppDelegate.swift */; };
 		F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989729BF990300AF7ECC /* SceneDelegate.swift */; };
 		F2EA989D29BF990300AF7ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2EA989B29BF990300AF7ECC /* Main.storyboard */; };
@@ -72,6 +74,8 @@
 		F20E183329C929A70068B704 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFiltersViewController.swift; sourceTree = "<group>"; };
 		F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceFilterViewController.swift; sourceTree = "<group>"; };
+		F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceTypeFilterViewControllerModal.swift; sourceTree = "<group>"; };
+		F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceRadiusFilterViewControllerModal.swift; sourceTree = "<group>"; };
 		F2EA989229BF990300AF7ECC /* MyStreet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStreet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EA989529BF990300AF7ECC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2EA989729BF990300AF7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
 				2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */,
 				F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */,
+				F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */,
+				F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */,
 				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
 				2CA84FE629C63A5B006A0341 /* Model.swift */,
@@ -291,6 +297,8 @@
 				F20E17F429C8EEBE0068B704 /* ConfirmationViewController.swift in Sources */,
 				A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */,
 				2C0AB64A29C8CAED006B276E /* OccurrenceListViewController.swift in Sources */,
+				F252F45929CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift in Sources */,
+				F252F45D29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift in Sources */,
 				A4DCD64A29CB761E007424F2 /* ReportViewController.swift in Sources */,
 				F20E183429C929A70068B704 /* Constants.swift in Sources */,
 				F20E184D29CB952D0068B704 /* OccurrenceFilterViewController.swift in Sources */,

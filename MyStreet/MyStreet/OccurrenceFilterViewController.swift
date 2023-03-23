@@ -8,22 +8,45 @@
 import UIKit
 
 class OccurrenceFilterViewController: UIViewController {
+    
+    var setTypeTitle: String!
+    var setTypeButton = UIButton(frame: .zero)
+    var setRadiusButton = UIButton(frame: .zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.radiusNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myRadiusKey"), object: nil)
+        
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .label
         navigationItem.title = "Filtragem ocorrências"
         
-        let action = UIAction() {_ in
-            self.navigationController?.pushViewController(UserMenuViewController(), animated: true)
+        let typeAction = UIAction() {_ in
+            let vc = OccurrenceTypeFilterViewControllerModal()
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
         }
         
-        let image = UIImage(systemName: "arrowtriangle.down.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let radiusAction = UIAction() {_ in
+            let vc = OccurrenceRadiusFilterViewControllerModal()
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
+        }
         
-        let setTypeButton = UIButton(type: .system, primaryAction: action)
+        let action = UIAction() {_ in
+            let vc = UserMenuViewController()
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
+        }
+        
+        let image = UIImage(systemName: "arrowtriangle.down.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+        
+        setTypeButton = UIButton(type: .system, primaryAction: typeAction)
         setTypeButton.translatesAutoresizingMaskIntoConstraints = false
-        setTypeButton.backgroundColor = .gray
+        setTypeButton.backgroundColor = .lightGray
         setTypeButton.setTitle("Tipo", for: .normal)
         setTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         setTypeButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
@@ -34,9 +57,9 @@ class OccurrenceFilterViewController: UIViewController {
         setTypeButton.imageView?.centerYAnchor.constraint(equalTo: setTypeButton.centerYAnchor, constant: 0.0).isActive = true
         setTypeButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
         
-        let setRadiusButton = UIButton(type: .system, primaryAction: action)
+        setRadiusButton = UIButton(type: .system, primaryAction: radiusAction)
         setRadiusButton.translatesAutoresizingMaskIntoConstraints = false
-        setRadiusButton.backgroundColor = .gray
+        setRadiusButton.backgroundColor = .lightGray
         setRadiusButton.setTitle("Raio", for: .normal)
         setRadiusButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         setRadiusButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
@@ -75,5 +98,18 @@ class OccurrenceFilterViewController: UIViewController {
             applyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             applyButton.heightAnchor.constraint(equalToConstant: 40),
         ])
+        
+    }
+    
+    @objc func typeNotificationReceived(_ notification: Notification) {
+        guard let text = notification.userInfo?["text"] as? String else { return }
+        print ("text: \(text)")
+        setTypeButton.setTitle(text, for: .normal)
+    }
+    
+    @objc func radiusNotificationReceived(_ notification: Notification) {
+        guard let text = notification.userInfo?["text"] as? String else { return }
+        print ("text: \(text)")
+        setRadiusButton.setTitle(text, for: .normal)
     }
 }
