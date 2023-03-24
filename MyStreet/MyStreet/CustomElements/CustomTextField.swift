@@ -18,8 +18,6 @@ class CustomTextField: UITextField {
         case location
         case reportTitle
         case reportFilter
-        case reportDescription
-
     }
     
     private let authFieldType: CustomTextFieldType
@@ -69,9 +67,6 @@ class CustomTextField: UITextField {
             self.keyboardType = .alphabet
         case .reportFilter:
             self.placeholder = "Tipo Problema"
-            self.keyboardType = .alphabet
-        case .reportDescription:
-            self.placeholder = "Descrição"
             self.keyboardType = .alphabet
         }
     }
