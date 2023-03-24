@@ -51,6 +51,9 @@
 		F20E184D29CB952D0068B704 /* OccurrenceFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */; };
 		F252F45929CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */; };
 		F252F45D29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */; };
+		F252F45F29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F45E29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift */; };
+		F252F46129CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */; };
+		F252F46329CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */; };
 		F2EA989629BF990300AF7ECC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989529BF990300AF7ECC /* AppDelegate.swift */; };
 		F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA989729BF990300AF7ECC /* SceneDelegate.swift */; };
 		F2EA989D29BF990300AF7ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2EA989B29BF990300AF7ECC /* Main.storyboard */; };
@@ -76,6 +79,9 @@
 		F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceFilterViewController.swift; sourceTree = "<group>"; };
 		F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceTypeFilterViewControllerModal.swift; sourceTree = "<group>"; };
 		F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceRadiusFilterViewControllerModal.swift; sourceTree = "<group>"; };
+		F252F45E29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceTypeFilterAdminViewControllerModal.swift; sourceTree = "<group>"; };
+		F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceRadiusFilterAdminViewControllerModal.swift; sourceTree = "<group>"; };
+		F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceStatusFilterAdminViewControllerModal.swift; sourceTree = "<group>"; };
 		F2EA989229BF990300AF7ECC /* MyStreet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStreet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EA989529BF990300AF7ECC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2EA989729BF990300AF7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +178,9 @@
 				F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */,
 				F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */,
 				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
+				F252F45E29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift */,
+				F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */,
+				F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
 				2CA84FE629C63A5B006A0341 /* Model.swift */,
 				F2EA989529BF990300AF7ECC /* AppDelegate.swift */,
@@ -304,8 +313,11 @@
 				F20E184D29CB952D0068B704 /* OccurrenceFilterViewController.swift in Sources */,
 				F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
+				F252F46129CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift in Sources */,
 				2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */,
 				2CA84FE929C63A5C006A0341 /* Model.swift in Sources */,
+				F252F45F29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift in Sources */,
+				F252F46329CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift in Sources */,
 				2C0AB64C29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

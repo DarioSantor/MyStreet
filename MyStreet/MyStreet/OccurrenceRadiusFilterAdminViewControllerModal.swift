@@ -1,5 +1,5 @@
 //
-//  OccurrenceRadiusFilterViewControllerModal.swift
+//  OccurrenceRadiusFilterAdminViewControllerModal.swift
 //  MyStreet
 //
 //  Created by Santos, Dario Ferreira on 23/03/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OccurrenceRadiusFilterViewControllerModal: UIViewController {
+class OccurrenceRadiusFilterAdminViewControllerModal: UIViewController {
     
     var distance500Button: UIButton! = nil
     var distance1kButton: UIButton! = nil
@@ -63,7 +63,7 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
     func makeTypeButtons(type: String) -> UIButton {
         let action = UIAction() {_ in
             let userInfo = [ "text" : type ]
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "myRadiusKey"), object: nil, userInfo: userInfo)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "myRadiusKeyAdmin"), object: nil, userInfo: userInfo)
             self.dismiss(animated: true)
         }
         

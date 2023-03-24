@@ -112,7 +112,7 @@ class OccurrenceTypeFilterViewControllerModal: UIViewController {
             closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             
-            lightButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            lightButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
             lightButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
             lightButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
             lightButton.heightAnchor.constraint(equalToConstant: 40),

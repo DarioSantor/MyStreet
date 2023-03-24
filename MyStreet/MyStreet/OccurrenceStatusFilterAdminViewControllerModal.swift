@@ -1,5 +1,5 @@
 //
-//  OccurrenceRadiusFilterViewControllerModal.swift
+//  OccurrenceStatusFilterAdminViewControllerModal.swift
 //  MyStreet
 //
 //  Created by Santos, Dario Ferreira on 23/03/2023.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class OccurrenceRadiusFilterViewControllerModal: UIViewController {
+class OccurrenceStatusFilterAdminViewControllerModal: UIViewController {
     
-    var distance500Button: UIButton! = nil
-    var distance1kButton: UIButton! = nil
-    var distance2kButton: UIButton! = nil
-    var distance5kButton: UIButton! = nil
-    var distance10kButton: UIButton! = nil
+    var solvedButton: UIButton! = nil
+    var unsolvedButton: UIButton! = nil
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -44,11 +41,8 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
             self.dismiss(animated: true)
         }
         
-        distance500Button = makeTypeButtons(type: "500 metros")
-        distance1kButton = makeTypeButtons(type: "1 Kilómetro")
-        distance2kButton = makeTypeButtons(type: "2 Kilómetros")
-        distance5kButton = makeTypeButtons(type: "5 Kilómetros")
-        distance10kButton = makeTypeButtons(type: "10 Kilómetros")
+        solvedButton = makeTypeButtons(type: "Resolvidas")
+        unsolvedButton = makeTypeButtons(type: "Por Resolver")
         
         let image = UIImage(systemName: "xmark.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         
@@ -63,7 +57,7 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
     func makeTypeButtons(type: String) -> UIButton {
         let action = UIAction() {_ in
             let userInfo = [ "text" : type ]
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "myRadiusKey"), object: nil, userInfo: userInfo)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "myStatusKeyAdmin"), object: nil, userInfo: userInfo)
             self.dismiss(animated: true)
         }
         
@@ -89,11 +83,8 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
         view.addSubview(dimmedView)
         view.addSubview(containerView)
         view.addSubview(closeButton)
-        view.addSubview(distance500Button)
-        view.addSubview(distance1kButton)
-        view.addSubview(distance2kButton)
-        view.addSubview(distance5kButton)
-        view.addSubview(distance10kButton)
+        view.addSubview(solvedButton)
+        view.addSubview(unsolvedButton)
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -112,30 +103,15 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
             closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             
-            distance500Button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
-            distance500Button.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
-            distance500Button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
-            distance500Button.heightAnchor.constraint(equalToConstant: 40),
+            solvedButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
+            solvedButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
+            solvedButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
+            solvedButton.heightAnchor.constraint(equalToConstant: 40),
             
-            distance1kButton.topAnchor.constraint(equalTo: distance500Button.bottomAnchor, constant: 10),
-            distance1kButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
-            distance1kButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
-            distance1kButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            distance2kButton.topAnchor.constraint(equalTo: distance1kButton.bottomAnchor, constant: 10),
-            distance2kButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
-            distance2kButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
-            distance2kButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            distance5kButton.topAnchor.constraint(equalTo: distance2kButton.bottomAnchor, constant: 10),
-            distance5kButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
-            distance5kButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
-            distance5kButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            distance10kButton.topAnchor.constraint(equalTo: distance5kButton.bottomAnchor, constant: 10),
-            distance10kButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
-            distance10kButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
-            distance10kButton.heightAnchor.constraint(equalToConstant: 40),
+            unsolvedButton.topAnchor.constraint(equalTo: solvedButton.bottomAnchor, constant: 20),
+            unsolvedButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
+            unsolvedButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
+            unsolvedButton.heightAnchor.constraint(equalToConstant: 40),
             
         ])
         
@@ -147,3 +123,4 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
         containerViewBottomConstraint?.isActive = true
     }
 }
+
