@@ -14,6 +14,7 @@
 		2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE729C63A5C006A0341 /* LoginViewController.swift */; };
 		2CE26F7229C7CBD400A49ABB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */; };
 		2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7329C7D54700A49ABB /* CustomButton.swift */; };
+		A455321F29CE702300B7AE95 /* OcurrenceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */; };
 		A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */; };
 		A4DCD64A29CB761E007424F2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD64929CB761E007424F2 /* ReportViewController.swift */; };
 		F20E17F229C8CA290068B704 /* UserMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E17F129C8CA290068B704 /* UserMenuViewController.swift */; };
@@ -69,6 +70,7 @@
 		2CA84FE729C63A5C006A0341 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CE26F7329C7D54700A49ABB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcurrenceDetailViewController.swift; sourceTree = "<group>"; };
 		A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A4DCD64929CB761E007424F2 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		F20E17F129C8CA290068B704 /* UserMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				F20E17F129C8CA290068B704 /* UserMenuViewController.swift */,
 				A4DCD64929CB761E007424F2 /* ReportViewController.swift */,
 				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
+				A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */,
 				2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */,
 				F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */,
 				F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */,
@@ -310,6 +313,7 @@
 				F252F45D29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift in Sources */,
 				A4DCD64A29CB761E007424F2 /* ReportViewController.swift in Sources */,
 				F20E183429C929A70068B704 /* Constants.swift in Sources */,
+				A455321F29CE702300B7AE95 /* OcurrenceDetailViewController.swift in Sources */,
 				F20E184D29CB952D0068B704 /* OccurrenceFilterViewController.swift in Sources */,
 				F2EA989829BF990300AF7ECC /* SceneDelegate.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
