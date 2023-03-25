@@ -1,13 +1,13 @@
 //
-//  OcurrencyListViewController.swift
+//  OcurrenceFilteredViewController.swift
 //  MyStreet
 //
-//  Created by Correia, Jose Bastos on 20/03/2023.
+//  Created by Correia, Jose Bastos on 25/03/2023.
 //
 
 import UIKit
 
-class OccurrenceListViewController: UIViewController {
+class OcurrenceFilteredViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
 
@@ -30,7 +30,7 @@ class OccurrenceListViewController: UIViewController {
         occurrenceTableView.showsVerticalScrollIndicator = false
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor), 
+            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -43,7 +43,7 @@ class OccurrenceListViewController: UIViewController {
     }
 }
 
-extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSource {
+extension OcurrenceFilteredViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

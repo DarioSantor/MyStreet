@@ -16,6 +16,9 @@ class OccurrenceFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = .label
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.radiusNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myRadiusKey"), object: nil)

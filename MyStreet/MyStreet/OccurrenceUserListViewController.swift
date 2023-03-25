@@ -1,13 +1,13 @@
 //
-//  OcurrencyListViewController.swift
+//  OccurrenceUserListViewController.swift
 //  MyStreet
 //
-//  Created by Correia, Jose Bastos on 20/03/2023.
+//  Created by Correia, Jose Bastos on 25/03/2023.
 //
 
 import UIKit
 
-class OccurrenceListViewController: UIViewController {
+class OccurrenceUserListViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
 
@@ -16,9 +16,6 @@ class OccurrenceListViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
-        
-        
-
         
         occurrenceTableView.delegate = self
         occurrenceTableView.dataSource = self
@@ -30,7 +27,7 @@ class OccurrenceListViewController: UIViewController {
         occurrenceTableView.showsVerticalScrollIndicator = false
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor), 
+            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -43,7 +40,7 @@ class OccurrenceListViewController: UIViewController {
     }
 }
 
-extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSource {
+extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
