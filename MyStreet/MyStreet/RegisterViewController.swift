@@ -23,6 +23,26 @@ class RegisterViewController: UIViewController {
         // forma de dar cor diferente aos item do navigation bar
         navigationController?.navigationBar.tintColor = .label
         
+        let emailErrorLabel = UILabel()
+        emailErrorLabel.textColor = .systemRed
+        emailErrorLabel.attributedText = NSAttributedString(string: "Email já registado.", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12.0)])
+        emailErrorLabel.isHidden = true
+        
+        let passwordErrorLabel = UILabel()
+        passwordErrorLabel.textColor = .systemRed
+        passwordErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+        passwordErrorLabel.isHidden = true
+        
+        let firstNameErrorLabel = UILabel()
+        firstNameErrorLabel.textColor = .systemRed
+        firstNameErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+        firstNameErrorLabel.isHidden = true
+        
+        let lastNameErrorLabel = UILabel()
+        lastNameErrorLabel.textColor = .systemRed
+        lastNameErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+        lastNameErrorLabel.isHidden = true
+        
         let action = UIAction() {_ in
             localizationAuthorization = true
             
@@ -31,17 +51,55 @@ class RegisterViewController: UIViewController {
             guard let password = self.passwordRegisterField.text else { return }
             guard let firstName = self.firstNameRegisterField.text else { return }
             guard let lastName = self.lastNameRegisterField.text else { return }
+            guard let confirmPass = self.confirmPassRegisterField.text else { return }
+
+            if firstName == "" {
+                firstNameErrorLabel.isHidden = false
+                firstNameErrorLabel.text = "Campo de preenchimento obrigatório."
+            }
+            else{
+                firstNameErrorLabel.isHidden = true
+
+            }
+            if lastName == "" {
+                lastNameErrorLabel.isHidden = false
+                lastNameErrorLabel.text = "Campo de preenchimento obrigatório."
+            }
+            else{
+                lastNameErrorLabel.isHidden = true
+
+            }
             
+            
+            if password != confirmPass {
+                passwordErrorLabel.isHidden = false
+                passwordErrorLabel.text = "Passwords não coincidem."
+
+                return
+            }
+            else{
+                passwordErrorLabel.isHidden = true
+
+            }
+            if password.count < 6 {
+                passwordErrorLabel.isHidden = false
+                passwordErrorLabel.text = "Password deve conter pelo menos 6 caracteres."
+                return
+            }
+            else{
+                passwordErrorLabel.isHidden = true
+
+            }
             // criação do utilizador, por defeito o registo verifica se o email está bem formatado e se
             // a pass tem pelo menos 6 caracteres
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                 if let error = error {
                     
                     // TODO tratamento de erros do servidor
-                    print("DEBUG - \(error.localizedDescription)")
+                    print("\(error.localizedDescription)")
                     return
                 }
-                print("DEBUG - Successfull Registration")
+                print("Successfull Registration")
                 
                 // recebemos o uid atribuido ao utilizador
                 guard let uid = result?.user.uid else { return }
@@ -49,7 +107,7 @@ class RegisterViewController: UIViewController {
                 // guarda o uid do user nos userDefaults
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(uid, forKey: "myUID")
-
+                
                 // valores para serem guardados na base de dados
                 let values = ["email": email, "firstName": firstName, "lastName": lastName]
                 
@@ -58,6 +116,20 @@ class RegisterViewController: UIViewController {
                     print("Successfully updated user info")
                 }
                 self.navigationController?.pushViewController(UserMenuViewController(), animated: true)
+            }
+            Auth.auth().fetchSignInMethods(forEmail: email) { signInMethods, error in
+                if let error = error {
+                    // Handle error
+                    print("\(error.localizedDescription)")
+                    return
+                }
+                
+                if let signInMethods = signInMethods, !signInMethods.isEmpty {
+                    emailErrorLabel.isHidden = false
+                    return
+                } else{
+                    emailErrorLabel.isHidden = true
+                }
             }
         }
         let registerButton = UIButton(type: .system, primaryAction: action)
@@ -74,7 +146,11 @@ class RegisterViewController: UIViewController {
             emailRegisterField,
             passwordRegisterField,
             confirmPassRegisterField,
-            registerButton
+            registerButton,
+            emailErrorLabel,
+            passwordErrorLabel,
+            lastNameErrorLabel,
+            firstNameErrorLabel,
         ]
         
         for item in items {
@@ -118,6 +194,18 @@ class RegisterViewController: UIViewController {
             registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             registerButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            emailErrorLabel.topAnchor.constraint(equalTo: emailRegisterField.bottomAnchor,constant:2),
+            emailErrorLabel.leadingAnchor.constraint(equalTo: emailRegisterField.leadingAnchor,constant:5),
+            
+            firstNameErrorLabel.topAnchor.constraint(equalTo: firstNameRegisterField.bottomAnchor,constant:2),
+            firstNameErrorLabel.leadingAnchor.constraint(equalTo: firstNameRegisterField.leadingAnchor,constant:5),
+            
+            lastNameErrorLabel.topAnchor.constraint(equalTo: lastNameRegisterField.bottomAnchor,constant:2),
+            lastNameErrorLabel.leadingAnchor.constraint(equalTo: lastNameRegisterField.leadingAnchor,constant:5),
+            
+            passwordErrorLabel.topAnchor.constraint(equalTo: confirmPassRegisterField.bottomAnchor, constant:2),
+                passwordErrorLabel.leadingAnchor.constraint(equalTo: confirmPassRegisterField.leadingAnchor, constant:5),
         
         ])
     }
