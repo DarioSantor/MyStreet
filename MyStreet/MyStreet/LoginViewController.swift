@@ -101,6 +101,10 @@ class LoginViewController: UIViewController {
             print("You're IIIIIINNNNNNNN")
             guard let uid = result?.user.uid else { return }
             
+            // guarda o uid do user nos userDefaults
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(uid, forKey: "myUID")
+            
             if uid == ADMIN_UID {
                 self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
                 return
