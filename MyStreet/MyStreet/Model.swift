@@ -10,10 +10,16 @@ import Foundation
 var localizationAuthorization = true
 
 
-struct Ocurrence {
+struct Occurrence {
     let description: String
     let location: String
+    let type: String
 }
 
-var occurrencies = [Ocurrence(description: "Lâmpada partida", location: "Rua da Frente"),Ocurrence(description: "Buranco na estrada", location: "Rua do Lado"),Ocurrence(description: "Sinal Partido", location: "Rua de Trás"),Ocurrence(description: "Passeio estreito", location: "Rua de Cima"),Ocurrence(description: "Estacionamento abusivo", location: "Rua de Baixo"),Ocurrence(description: "Animal abandonado", location: "Rua do Outro Lado"),
+var occurrences = [Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),
+                    Occurrence(description: "Buranco na estrada", location: "Rua do Lado", type: "Piso em Mau Estado"),
+                    Occurrence(description: "Sinal Partido", location: "Rua de Trás", type: "Outros"),
+                    Occurrence(description: "Passeio estreito", location: "Rua de Cima", type: "Piso em Mau Estado"),
+                    Occurrence(description: "Estacionamento abusivo", location: "Rua de Baixo", type: "Outros"),
+                    Occurrence(description: "Animal abandonado", location: "Rua do Outro Lado", type: "Animais Abandonados"),
 ]

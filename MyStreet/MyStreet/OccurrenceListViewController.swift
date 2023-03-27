@@ -51,12 +51,12 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        occurrencies.count
+        occurrences.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurence: occurrencies[indexPath.row])
+        cell.configure(occurence: occurrences[indexPath.row])
         return cell
     }
 }

@@ -40,7 +40,7 @@ class OccurrenceFilterViewController: UIViewController {
         }
         
         let action = UIAction() {_ in
-            let vc = UserMenuViewController()
+            let vc = OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: occurrences)
             vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         }
