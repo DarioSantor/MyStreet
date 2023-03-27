@@ -16,6 +16,9 @@ class OccurrenceFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = .label
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.radiusNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myRadiusKey"), object: nil)
@@ -37,7 +40,7 @@ class OccurrenceFilterViewController: UIViewController {
         }
         
         let action = UIAction() {_ in
-            let vc = UserMenuViewController()
+            let vc = OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: occurrences)
             vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         }
