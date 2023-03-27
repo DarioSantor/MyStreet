@@ -184,7 +184,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
         keyboardHeight = keyboardSize.cgRectValue.height
         UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = -self.keyboardHeight / 2
+            self.view.frame.origin.y = -self.keyboardHeight
         }
     }
         
@@ -192,10 +192,14 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
+    
+       
+	}
     @objc func typeNotificationReceived(_ notification: Notification) {
         guard let text = notification.userInfo?["text"] as? String else { return }
         print ("text: \(text)")
         setTypeButton.setTitle(text, for: .normal)
-	}
     }
+    
 }
+
