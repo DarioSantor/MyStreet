@@ -23,13 +23,19 @@ class LoginViewController: UIViewController {
         label.text = "Não tem conta?"
         return label
     }()
+    
+    private var keyboardHeight: CGFloat = 0.0
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
         view.backgroundColor = .systemBackground
         // forma de esconder o back button e texto
         navigationItem.setHidesBackButton(true, animated: false)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     
         view.addSubview(logo)
         view.addSubview(emailLoginField)
@@ -117,5 +123,18 @@ class LoginViewController: UIViewController {
     @objc func goToRegisterVC() {
         navigationController?.pushViewController(RegisterViewController(), animated: true)
     }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
+        keyboardHeight = keyboardSize.cgRectValue.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -self.keyboardHeight / 2
+        }
+    }
+        
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
 }
-
