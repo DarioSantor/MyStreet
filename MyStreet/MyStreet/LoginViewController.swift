@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     //test
     
+    
     private let logo = UIImageView(image: UIImage(named: "logo"))
     
     private var isUserAdmin: Bool = false
