@@ -13,10 +13,16 @@ class ReportViewController: UIViewController,UITextViewDelegate {
     private let reportTitleField = CustomTextField(fieldType: .reportTitle)
     private let reportFilterField = CustomTextField(fieldType: .reportFilter)
     private let reportDescriptonField = UITextView()
+    
+    private var keyboardHeight: CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         reportDescriptonField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let title = UILabel()
         title.text = "Reportar Ocorrência"
@@ -138,6 +144,21 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             textView.text = " Descrição"
             textView.textColor = UIColor.lightGray
             textView.alpha = 0.7
+        }
+    }
+    
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
+        keyboardHeight = keyboardSize.cgRectValue.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -self.keyboardHeight / 2
+        }
+    }
+        
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
         }
     }
 }

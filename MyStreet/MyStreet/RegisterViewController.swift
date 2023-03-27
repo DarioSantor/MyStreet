@@ -44,6 +44,7 @@ class RegisterViewController: UIViewController {
         lastNameErrorLabel.textColor = .systemRed
         lastNameErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
         lastNameErrorLabel.isHidden = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
