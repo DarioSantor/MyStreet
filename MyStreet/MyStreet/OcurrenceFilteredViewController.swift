@@ -33,18 +33,19 @@ class OccurrenceFilteredViewController: UIViewController {
     private var occurencesToDisplay: [Occurrence] = []
 
     
-    init(typeFilter: FilterOccurrenceType, distanceFilter: FilterOccurrenceDistance, occurrences: [Occurrence]) {
+    init(typeFilter: FilterOccurrenceType, distanceFilter: FilterOccurrenceDistance, occurrences: [Occurrence], title: String) {
         self.typeFilter = typeFilter
         self.distanceFilter = distanceFilter
-        super.init()
+        super.init(nibName: nil, bundle: nil)
         self.occurencesToDisplay = filteredOccurences(from: occurrences)
+        print(title)
         
-        
-        
+        navigationItem.title = title
+
         
     }
     
-    private func filteredOccurences(from occurrences: [Occurrence]) -> [Occurrence] {
+    func filteredOccurences(from occurrences: [Occurrence]) -> [Occurrence] {
         switch typeFilter {
         case .light:
             let filteredOccurrences = occurrences.filter { $0.type == "Iluminação Pública" }
@@ -75,10 +76,6 @@ class OccurrenceFilteredViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
-        
-        
-
         
         occurrenceTableView.delegate = self
         occurrenceTableView.dataSource = self
@@ -114,12 +111,13 @@ extension OccurrenceFilteredViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        occurrences.count
+        return occurencesToDisplay.count > 0 ? occurencesToDisplay.count : 0
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurence: occurrences[indexPath.row])
+        cell.configure(occurence: occurencesToDisplay[indexPath.row])
         return cell
     }
 }
