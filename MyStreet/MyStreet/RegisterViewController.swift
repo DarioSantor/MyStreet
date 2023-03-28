@@ -16,6 +16,8 @@ class RegisterViewController: UIViewController {
     private let emailRegisterField = CustomTextField(fieldType: .email)
     private let passwordRegisterField = CustomTextField(fieldType: .password)
     private let confirmPassRegisterField = CustomTextField(fieldType: .confirmPass)
+    
+    private var keyboardHeight: CGFloat = 0.0
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,9 @@ class RegisterViewController: UIViewController {
         lastNameErrorLabel.textColor = .systemRed
         lastNameErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
         lastNameErrorLabel.isHidden = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let action = UIAction() {_ in
             localizationAuthorization = true
@@ -208,5 +213,19 @@ class RegisterViewController: UIViewController {
                 passwordErrorLabel.leadingAnchor.constraint(equalTo: confirmPassRegisterField.leadingAnchor, constant:5),
         
         ])
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
+        keyboardHeight = keyboardSize.cgRectValue.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -self.keyboardHeight / 2
+        }
+    }
+        
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
     }
 }
