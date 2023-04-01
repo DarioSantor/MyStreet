@@ -16,10 +16,7 @@ class OccurrenceListViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
-        
-        
 
-        
         occurrenceTableView.delegate = self
         occurrenceTableView.dataSource = self
         occurrenceTableView.register(CustomOcurrencetableViewCellTableViewCell.self, forCellReuseIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier)
@@ -34,7 +31,6 @@ class OccurrenceListViewController: UIViewController {
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
     }
     
     @objc func didTapFilters() {
@@ -44,7 +40,6 @@ class OccurrenceListViewController: UIViewController {
 }
 
 extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         120

@@ -12,10 +12,11 @@
 		2C4D113529CF7C4600C485A6 /* OccurrenceUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D113429CF7C4600C485A6 /* OccurrenceUserListViewController.swift */; };
 		2C4D113929CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D113829CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift */; };
 		2CA84FE829C63A5C006A0341 /* LocalizationAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */; };
-		2CA84FE929C63A5C006A0341 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE629C63A5B006A0341 /* Model.swift */; };
+		2CA84FE929C63A5C006A0341 /* Ocurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE629C63A5B006A0341 /* Ocurrence.swift */; };
 		2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE729C63A5C006A0341 /* LoginViewController.swift */; };
 		2CE26F7229C7CBD400A49ABB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */; };
 		2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7329C7D54700A49ABB /* CustomButton.swift */; };
+		750CD9B229D8A48800631C25 /* OccurrenceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */; };
 		A455321F29CE702300B7AE95 /* OcurrenceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */; };
 		A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */; };
 		A4DCD64A29CB761E007424F2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD64929CB761E007424F2 /* ReportViewController.swift */; };
@@ -70,10 +71,11 @@
 		2C4D113429CF7C4600C485A6 /* OccurrenceUserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceUserListViewController.swift; sourceTree = "<group>"; };
 		2C4D113829CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcurrenceFilteredViewController.swift; sourceTree = "<group>"; };
 		2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationAuthViewController.swift; sourceTree = "<group>"; };
-		2CA84FE629C63A5B006A0341 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2CA84FE629C63A5B006A0341 /* Ocurrence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ocurrence.swift; sourceTree = "<group>"; };
 		2CA84FE729C63A5C006A0341 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CE26F7329C7D54700A49ABB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceFirebase.swift; sourceTree = "<group>"; };
 		A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcurrenceDetailViewController.swift; sourceTree = "<group>"; };
 		A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A4DCD64929CB761E007424F2 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,15 @@
 			path = CustomElements;
 			sourceTree = "<group>";
 		};
+		750CD9AE29D8A32900631C25 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CA84FE629C63A5B006A0341 /* Ocurrence.swift */,
+				750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F20E183229C929890068B704 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +183,7 @@
 		F2EA989429BF990300AF7ECC /* MyStreet */ = {
 			isa = PBXGroup;
 			children = (
+				750CD9AE29D8A32900631C25 /* Model */,
 				F20E183229C929890068B704 /* Utils */,
 				2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */,
 				2CA84FE729C63A5C006A0341 /* LoginViewController.swift */,
@@ -191,7 +203,6 @@
 				F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */,
 				F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
-				2CA84FE629C63A5B006A0341 /* Model.swift */,
 				F2EA989529BF990300AF7ECC /* AppDelegate.swift */,
 				F2EA989729BF990300AF7ECC /* SceneDelegate.swift */,
 				F2EA989B29BF990300AF7ECC /* Main.storyboard */,
@@ -325,9 +336,10 @@
 				2C4D113529CF7C4600C485A6 /* OccurrenceUserListViewController.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
 				2C4D113929CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift in Sources */,
+				750CD9B229D8A48800631C25 /* OccurrenceFirebase.swift in Sources */,
 				F252F46129CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift in Sources */,
 				2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */,
-				2CA84FE929C63A5C006A0341 /* Model.swift in Sources */,
+				2CA84FE929C63A5C006A0341 /* Ocurrence.swift in Sources */,
 				F252F45F29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift in Sources */,
 				F252F46329CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift in Sources */,
 				2C0AB64C29C8D40D006B276E /* CustomOcurrencetableViewCellTableViewCell.swift in Sources */,

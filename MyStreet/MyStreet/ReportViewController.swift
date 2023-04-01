@@ -9,7 +9,7 @@ import UIKit
 
 class ReportViewController: UIViewController,UITextViewDelegate {
 
-    private let reportLocalizationField = CustomTextField(fieldType: .location)
+    private let reportLocationField = CustomTextField(fieldType: .location)
     private let reportTitleField = CustomTextField(fieldType: .reportTitle)
     var setTypeButton = UIButton(frame: .zero)
     private let reportDescriptonField = UITextView()
@@ -71,18 +71,18 @@ class ReportViewController: UIViewController,UITextViewDelegate {
 
         
         let reportAction = UIAction {_ in
-            guard let localization = self.reportLocalizationField.text else { return }
+            guard let location = self.reportLocationField.text else { return }
             guard let title = self.reportTitleField.text else { return }
 //            guard let type = self.reportFilterField.text else { return }
             guard let description = self.reportDescriptonField.text else { return }
             
-            let values = ["localization": localization, "title": title, /*"type": type,*/ "description": description]
+            let values = ["location": location, "title": title, /*"type": type,*/ "description": description]
             
             let userDefaults = UserDefaults.standard
             
             let uid = userDefaults.object(forKey: "myUID")
             
-            REF_ISSUES.child(uid as! String).updateChildValues(values) { (error, ref) in
+            REF_OCCURRENCES.child(uid as! String).updateChildValues(values) { (error, ref) in
                 print("Successfully updated issue info")
             }
             self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
@@ -97,7 +97,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         
         let items = [
             title,
-            reportLocalizationField,
+            reportLocationField,
             locationImg,
             reportTitleField,
 //            reportFilterField,
@@ -117,20 +117,20 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            reportLocalizationField.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
-            reportLocalizationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-            reportLocalizationField.trailingAnchor.constraint(equalTo: locationImg.leadingAnchor,constant:-20),
-            reportLocalizationField.heightAnchor.constraint(equalToConstant:40),
+            reportLocationField.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
+            reportLocationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+            reportLocationField.trailingAnchor.constraint(equalTo: locationImg.leadingAnchor,constant:-20),
+            reportLocationField.heightAnchor.constraint(equalToConstant:40),
             
             locationImg.topAnchor.constraint(equalTo: title.bottomAnchor, constant:20),
-            locationImg.leadingAnchor.constraint(equalTo: reportLocalizationField.trailingAnchor,constant:20),
+            locationImg.leadingAnchor.constraint(equalTo: reportLocationField.trailingAnchor,constant:20),
             locationImg.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-            locationImg.bottomAnchor.constraint(equalTo: reportLocalizationField.bottomAnchor),
+            locationImg.bottomAnchor.constraint(equalTo: reportLocationField.bottomAnchor),
             locationImg.heightAnchor.constraint(equalToConstant:40),
             locationImg.widthAnchor.constraint(equalToConstant:40),
 
 
-            reportTitleField.topAnchor.constraint(equalTo: reportLocalizationField.bottomAnchor,constant:10),
+            reportTitleField.topAnchor.constraint(equalTo: reportLocationField.bottomAnchor,constant:10),
             reportTitleField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportTitleField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             reportTitleField.bottomAnchor.constraint(equalTo: setTypeButton.topAnchor,constant:-10),

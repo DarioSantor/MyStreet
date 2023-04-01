@@ -12,14 +12,6 @@ class OccurrenceFilterViewController: UIViewController {
     var setTypeTitle: String!
     var setTypeButton = UIButton(frame: .zero)
     var setRadiusButton = UIButton(frame: .zero)
-    
-    var occ = [Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),Occurrence(description: "Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública"),
-                                               Occurrence(description: "Buranco na estrada", location: "Rua do Lado", type: "Piso em Mau Estado"),
-                                               Occurrence(description: "Sinal Partido", location: "Rua de Trás", type: "Outros"),
-                                               Occurrence(description: "Passeio estreito", location: "Rua de Cima", type: "Piso em Mau Estado"),
-                                               Occurrence(description: "Estacionamento abusivo", location: "Rua de Baixo", type: "Outros"),
-                                               Occurrence(description: "Animal abandonado", location: "Rua do Outro Lado", type: "Animais Abandonados"),
-                           ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +48,7 @@ class OccurrenceFilterViewController: UIViewController {
             
             print(typeAction.attributes.isEmpty)
             
-            self.navigationController?.pushViewController(OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: self.occ, title: self.setTypeButton.currentTitle!), animated: true)
+            self.navigationController?.pushViewController(OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: occurrences, title: self.setTypeButton.currentTitle!), animated: true)
         }
         
         let image = UIImage(systemName: "arrowtriangle.down.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal)

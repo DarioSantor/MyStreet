@@ -75,7 +75,6 @@ class RegisterViewController: UIViewController {
 
             }
             
-            
             if password != confirmPass {
                 passwordErrorLabel.isHidden = false
                 passwordErrorLabel.text = "Passwords não coincidem."
