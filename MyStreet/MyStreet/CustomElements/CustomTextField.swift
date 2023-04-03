@@ -18,6 +18,7 @@ class CustomTextField: UITextField {
         case location
         case reportTitle
         case reportFilter
+
     }
     
     private let authFieldType: CustomTextFieldType

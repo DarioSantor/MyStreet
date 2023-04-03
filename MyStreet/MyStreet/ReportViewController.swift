@@ -100,7 +100,6 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             reportLocationField,
             locationImg,
             reportTitleField,
-//            reportFilterField,
             reportDescriptonField,
             reportImage,
             submitBtn,
@@ -135,12 +134,6 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             reportTitleField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             reportTitleField.bottomAnchor.constraint(equalTo: setTypeButton.topAnchor,constant:-10),
             reportTitleField.heightAnchor.constraint(equalToConstant:40),
-            
-//            reportFilterField.topAnchor.constraint(equalTo: reportTitleField.bottomAnchor),
-//            reportFilterField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-//            reportFilterField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-//            reportFilterField.bottomAnchor.constraint(equalTo: reportDescriptonField.topAnchor,constant:-10),
-//            reportFilterField.heightAnchor.constraint(equalToConstant:40),
             
             setTypeButton.topAnchor.constraint(equalTo: reportTitleField.bottomAnchor),
             setTypeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
