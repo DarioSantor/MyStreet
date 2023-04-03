@@ -16,6 +16,10 @@ class OccurrenceListViewController: UIViewController {
         super.viewDidLoad()
         getOccurrencesFromDatabase()
         view.backgroundColor = .systemBackground
+        
+        navigationItem.title = "Ver Ocorrências"
+        navigationItem.backButtonTitle = ""
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
 
         occurrenceTableView.delegate = self

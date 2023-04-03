@@ -14,6 +14,8 @@ class UserMenuViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .label
         navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.backButtonTitle = ""
+
         
         let logo = UIImageView(image: UIImage(named: "logo"))
         logo.translatesAutoresizingMaskIntoConstraints = false

@@ -17,7 +17,7 @@ class OccurrenceFilterViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = .label
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
         
@@ -25,7 +25,16 @@ class OccurrenceFilterViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .label
-        navigationItem.title = "Filtragem ocorrências"
+//        navigationItem.hidesBackButton = false
+//        navigationItem.backButtonTitle = "oi"
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "oi", style: .plain, target: nil, action: nil)
+        
+        
+        self.navigationItem.title = "Filtragem ocorrências"
+        self.navigationItem.backBarButtonItem?.title = ""
+//        navigationItem.backButtonTitle = ""
+
         
         let typeAction = UIAction() {_ in
             let vc = OccurrenceTypeFilterViewControllerModal()
