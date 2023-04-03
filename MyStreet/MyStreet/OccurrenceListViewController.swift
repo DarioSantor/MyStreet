@@ -54,4 +54,10 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
         cell.configure(occurence: occurrences[indexPath.row])
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.navigationController?.pushViewController(OcurrenceDetailViewController(viewModelOccurrence: occurrences[indexPath.row]), animated: true)
+
+        
+    }
 }
