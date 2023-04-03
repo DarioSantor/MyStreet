@@ -10,6 +10,14 @@ import UIKit
 class OccurrenceUserListViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
+    var occurrences2 = [Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +56,12 @@ extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        occurrences.count
+        occurrences2.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurence: occurrences[indexPath.row])
+        cell.configure(occurence: occurrences2[indexPath.row])
         return cell
     }
 }

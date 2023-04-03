@@ -16,7 +16,6 @@
 		2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA84FE729C63A5C006A0341 /* LoginViewController.swift */; };
 		2CE26F7229C7CBD400A49ABB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */; };
 		2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE26F7329C7D54700A49ABB /* CustomButton.swift */; };
-		750CD9B229D8A48800631C25 /* OccurrenceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */; };
 		A455321F29CE702300B7AE95 /* OcurrenceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */; };
 		A4DCD63C29C89F57007424F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */; };
 		A4DCD64A29CB761E007424F2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCD64929CB761E007424F2 /* ReportViewController.swift */; };
@@ -75,7 +74,6 @@
 		2CA84FE729C63A5C006A0341 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CE26F7129C7CBD400A49ABB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CE26F7329C7D54700A49ABB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurrenceFirebase.swift; sourceTree = "<group>"; };
 		A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcurrenceDetailViewController.swift; sourceTree = "<group>"; };
 		A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A4DCD64929CB761E007424F2 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				2CA84FE629C63A5B006A0341 /* Ocurrence.swift */,
-				750CD9B129D8A48800631C25 /* OccurrenceFirebase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 				2C4D113529CF7C4600C485A6 /* OccurrenceUserListViewController.swift in Sources */,
 				2CE26F7429C7D54700A49ABB /* CustomButton.swift in Sources */,
 				2C4D113929CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift in Sources */,
-				750CD9B229D8A48800631C25 /* OccurrenceFirebase.swift in Sources */,
 				F252F46129CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift in Sources */,
 				2CA84FEA29C63A5C006A0341 /* LoginViewController.swift in Sources */,
 				2CA84FE929C63A5C006A0341 /* Ocurrence.swift in Sources */,

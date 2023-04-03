@@ -24,5 +24,4 @@ var occurrences = [Occurrence(title:"Lâmpada partida", location: "Rua da Frente
                    Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
                    Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
                    Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                   Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")
-]
+                   Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")]
