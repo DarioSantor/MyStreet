@@ -8,19 +8,18 @@
 import UIKit
 
 class OcurrenceDetailViewController: UIViewController {
-    private let stateField = CustomTextField(fieldType: .reportFilter)
+    private let stateField = UILabel()
+    private let observationField = CustomTextField(fieldType: .reportObservation)
     private let descriptonField = UITextView()
+    var selectedIndexPath: IndexPath?
     
-    
-    
-    init(viewModelOccurrence: Occurrence) {
+    private let selectedOccurrence: Occurrence
         
-        // TODO
-        ///instantiate the variables with the vmoccurences
-        
-        super.init(nibName: nil, bundle: nil)
-        
-    }
+        init(selectedOccurrence: Occurrence) {
+            self.selectedOccurrence = selectedOccurrence
+            super.init(nibName: nil, bundle: nil)
+        }
+       
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -29,19 +28,30 @@ class OcurrenceDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+        let customCell = CustomOcurrencetableViewCellTableViewCell()
+        customCell.configure(occurence: selectedOccurrence)
         let title = UILabel()
-        title.text = "Reportar Ocorrência"
-        let checkImg = UIImageView(image: UIImage(systemName: "checkmark")?.withTintColor(UIColor.label))
+        title.text = "Ver Ocorrências"
+        let checkImg = UIImageView(image: UIImage(named:"checkmark"))
 
         checkImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
+        checkImg.backgroundColor = .secondarySystemBackground
         checkImg.layer.cornerRadius = 8
 
         descriptonField.backgroundColor = .secondarySystemBackground
         descriptonField.font = UIFont.systemFont(ofSize: 20)
         descriptonField.text = " Descrição"
+        descriptonField.text = selectedOccurrence.description
         descriptonField.textColor = UIColor.lightGray
         descriptonField.layer.cornerRadius = 8
+        
+        stateField.text = "  Estado"
+        stateField.backgroundColor = .secondarySystemBackground
+        stateField.textColor = UIColor.lightGray
+        stateField.font = UIFont.systemFont(ofSize: 20)
+        stateField.layer.cornerRadius = 8
+        stateField.clipsToBounds = true
+
         
         
         
@@ -55,7 +65,9 @@ class OcurrenceDetailViewController: UIViewController {
             stateField,
             descriptonField,
             reportImage,
-            checkImg
+            checkImg,
+            observationField,
+            customCell,
         ]
         
         for item in items {
@@ -67,21 +79,32 @@ class OcurrenceDetailViewController: UIViewController {
             title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            descriptonField.topAnchor.constraint(equalTo: title.bottomAnchor,constant:40),
+            customCell.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
+            customCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            customCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            customCell.heightAnchor.constraint(equalToConstant: 100),
+            
+            descriptonField.topAnchor.constraint(equalTo: customCell.bottomAnchor,constant:20),
             descriptonField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             descriptonField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             descriptonField.heightAnchor.constraint(equalToConstant:200),
-            
-            stateField.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
-            stateField.heightAnchor.constraint(equalToConstant:40),
 
-            
-            reportImage.topAnchor.constraint(equalTo: descriptonField.bottomAnchor,constant:10),
+            reportImage.topAnchor.constraint(equalTo: descriptonField.bottomAnchor,constant:20),
             reportImage.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportImage.heightAnchor.constraint(equalToConstant: 200),
             reportImage.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             
-            checkImg.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
+            observationField.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
+            observationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+            observationField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
+            observationField.heightAnchor.constraint(equalToConstant: 40),
+            
+            stateField.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
+            stateField.heightAnchor.constraint(equalToConstant:40),
+            stateField.widthAnchor.constraint(equalToConstant: 290),
+            stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+            
+            checkImg.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
             checkImg.leadingAnchor.constraint(equalTo: stateField.trailingAnchor,constant:20),
             checkImg.widthAnchor.constraint(equalToConstant: 40),
             checkImg.heightAnchor.constraint(equalToConstant: 40)

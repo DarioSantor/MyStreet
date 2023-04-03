@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomTextField: UITextField {
-
+    
     enum CustomTextFieldType {
         case email
         case password
@@ -18,7 +18,8 @@ class CustomTextField: UITextField {
         case location
         case reportTitle
         case reportFilter
-
+        case reportObservation
+        
     }
     
     private let authFieldType: CustomTextFieldType
@@ -69,12 +70,17 @@ class CustomTextField: UITextField {
         case .reportFilter:
             self.placeholder = "Tipo Problema"
             self.keyboardType = .alphabet
+        case .reportObservation:
+            self.placeholder = "Adicionar Observação"
+            self.keyboardType = .alphabet
         }
+        
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
 }

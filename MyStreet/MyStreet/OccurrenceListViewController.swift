@@ -28,7 +28,7 @@ class OccurrenceListViewController: UIViewController {
         occurrenceTableView.showsVerticalScrollIndicator = false
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor), 
+            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -55,6 +55,12 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
         cell.configure(occurence: occurrencesToDisplay[indexPath.row])
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let occurrence = occurrencesToDisplay[indexPath.row]
+        let detailVC = OcurrenceDetailViewController(selectedOccurrence: occurrence)
+        detailVC.selectedIndexPath = indexPath
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func getOccurrencesFromDatabase() {
@@ -83,3 +89,5 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     }
 
 }
+
+   
