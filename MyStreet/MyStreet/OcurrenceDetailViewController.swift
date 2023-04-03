@@ -11,6 +11,21 @@ class OcurrenceDetailViewController: UIViewController {
     private let stateField = CustomTextField(fieldType: .reportFilter)
     private let descriptonField = UITextView()
     
+    
+    
+    init(viewModelOccurrence: Occurrence) {
+        
+        // TODO
+        ///instantiate the variables with the vmoccurences
+        
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
