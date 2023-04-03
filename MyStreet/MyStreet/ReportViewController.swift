@@ -13,6 +13,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
     private let reportTitleField = CustomTextField(fieldType: .reportTitle)
     var setTypeButton = UIButton(frame: .zero)
     private let reportDescriptonField = UITextView()
+    var buttonText: String? = ""
     
     private var keyboardHeight: CGFloat = 0.0
     
@@ -73,10 +74,10 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         let reportAction = UIAction {_ in
             guard let location = self.reportLocationField.text else { return }
             guard let title = self.reportTitleField.text else { return }
-//            guard let type = self.reportFilterField.text else { return }
+            guard let type = self.buttonText else { return }
             guard let description = self.reportDescriptonField.text else { return }
             
-            let values = ["location": location, "title": title, /*"type": type,*/ "description": description]
+            let values = ["location": location, "title": title, "type": type, "description": description]
             
             let userDefaults = UserDefaults.standard
             
@@ -191,6 +192,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
     @objc func typeNotificationReceived(_ notification: Notification) {
         guard let text = notification.userInfo?["text"] as? String else { return }
         print ("text: \(text)")
+        buttonText = text
         setTypeButton.setTitle(text, for: .normal)
     }
     
