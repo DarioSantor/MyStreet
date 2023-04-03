@@ -80,14 +80,19 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             let values = ["location": location, "title": title, "type": type, "description": description]
             
             let userDefaults = UserDefaults.standard
+            guard let uid = userDefaults.object(forKey: "myUID") as? String else { return }
             
-            let uid = userDefaults.object(forKey: "myUID")
-            
-            REF_OCCURRENCES.child(uid as! String).updateChildValues(values) { (error, ref) in
-                print("Successfully updated issue info")
+            let newReportRef = REF_OCCURRENCES.child(uid).childByAutoId()
+            newReportRef.setValue(values) { (error, ref) in
+                if let error = error {
+                    print("Error adding new report: \(error.localizedDescription)")
+                } else {
+                    print("Successfully added new report")
+                    self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
+                }
             }
-            self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
         }
+
         
         let submitBtn = UIButton(type: .system, primaryAction: reportAction)
         submitBtn.setTitle("SUBMETER", for: .normal)
