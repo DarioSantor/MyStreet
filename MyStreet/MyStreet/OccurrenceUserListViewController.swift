@@ -10,14 +10,16 @@ import UIKit
 class OccurrenceUserListViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
-    var occurrences2 = [Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")]
+    let occurrenceService = OccurrenceService()
+    var occurrencesToDisplay: [Occurrence] = []
+//    var occurrences2 = [Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
+//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,14 @@ class OccurrenceUserListViewController: UIViewController {
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
+        DispatchQueue.main.async {
+                self.occurrenceService.getOccurrencesFromDatabase { occurrences in
+                    self.occurrencesToDisplay = occurrences
+                    self.occurrenceTableView.reloadData()
+                    print("table reloaded")
+                    print(self.occurrencesToDisplay)
+                }
+            }
     }
     
     @objc func didTapFilters() {
@@ -56,12 +65,12 @@ extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        occurrences2.count
+        return occurrencesToDisplay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurence: occurrences2[indexPath.row])
+        cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
         return cell
     }
 }

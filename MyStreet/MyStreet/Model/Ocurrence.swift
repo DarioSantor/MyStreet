@@ -15,6 +15,8 @@ struct Occurrence: Codable {
     let location: String
     let type: String
     let description: String
+    let image: Data?
+    let userUID: String
 }
 
 struct OccurrenceList: Codable {

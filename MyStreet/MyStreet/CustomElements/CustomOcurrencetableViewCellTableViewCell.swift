@@ -82,8 +82,8 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
 
     }
     
-    func configure(occurence: Occurrence) {
-        descriptionLabel.text = occurence.description
-        locationLabel.text = occurence.location
+    func configure(occurrence: Occurrence) {
+        descriptionLabel.text = occurrence.description
+        locationLabel.text = occurrence.location
     }
 }

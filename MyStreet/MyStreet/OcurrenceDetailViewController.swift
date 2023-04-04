@@ -29,7 +29,7 @@ class OcurrenceDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         let customCell = CustomOcurrencetableViewCellTableViewCell()
-        customCell.configure(occurence: selectedOccurrence)
+        customCell.configure(occurrence: selectedOccurrence)
         let title = UILabel()
         title.text = "Ver Ocorrências"
         let checkImg = UIImageView(image: UIImage(named:"checkmark"))

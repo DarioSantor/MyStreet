@@ -30,14 +30,14 @@ class OccurrenceFilteredViewController: UIViewController {
     private let typeFilter: FilterOccurrenceType
     private let distanceFilter: FilterOccurrenceDistance
     
-    private var occurencesToDisplay: [Occurrence] = []
+    private var occurrencesToDisplay: [Occurrence] = []
 
     
     init(typeFilter: FilterOccurrenceType, distanceFilter: FilterOccurrenceDistance, occurrences: [Occurrence], title: String) {
         self.typeFilter = typeFilter
         self.distanceFilter = distanceFilter
         super.init(nibName: nil, bundle: nil)
-        self.occurencesToDisplay = filteredOccurences(from: occurrences)
+        self.occurrencesToDisplay = filteredOccurrences(from: occurrences)
         print(title)
         
         navigationItem.title = title
@@ -45,7 +45,7 @@ class OccurrenceFilteredViewController: UIViewController {
         
     }
     
-    func filteredOccurences(from occurrences: [Occurrence]) -> [Occurrence] {
+    func filteredOccurrences(from occurrences: [Occurrence]) -> [Occurrence] {
         switch typeFilter {
         case .light:
             let filteredOccurrences = occurrences.filter { $0.type == "Iluminação Pública" }
@@ -110,13 +110,13 @@ extension OccurrenceFilteredViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return occurencesToDisplay.count > 0 ? occurencesToDisplay.count : 0
+        return occurrencesToDisplay.count > 0 ? occurrencesToDisplay.count : 0
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurence: occurencesToDisplay[indexPath.row])
+        cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
         return cell
     }
 }

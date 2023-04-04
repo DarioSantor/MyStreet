@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import FirebaseStorage
 
 class ReportViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
     
@@ -90,27 +91,81 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         
         
         
+//        let reportAction = UIAction {_ in
+//            guard let location = self.reportLocationField.text,
+//                  let title = self.reportTitleField.text,
+//                  let type = self.buttonText,
+//                  let description = self.reportDescriptonField.text,
+//                  let imageToCompress = self.reportImage.image?.jpegData(compressionQuality: 0.5),
+//                  let currentUserUID = UserDefaults.standard.string(forKey: "myUID") else {
+//                return
+//            }
+//
+//
+//
+//            let newReportRef = REF_OCCURRENCES.childByAutoId()
+//            newReportRef.setValue(values) { (error, ref) in
+//                if let error = error {
+//                    print("Error adding new report: \(error.localizedDescription)")
+//                } else {
+//                    print("Successfully added new report")
+//                    self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
+//                }
+//            }
+//        }
+        
+        
         let reportAction = UIAction {_ in
             guard let location = self.reportLocationField.text,
                   let title = self.reportTitleField.text,
                   let type = self.buttonText,
                   let description = self.reportDescriptonField.text,
+                  let imageToCompress = self.reportImage.image?.jpegData(compressionQuality: 0.5),
                   let currentUserUID = UserDefaults.standard.string(forKey: "myUID") else {
+                print("early exit")
                 return
             }
+
+            let values = ["location": location,
+                          "title": title,
+                          "type": type,
+                          "description": description,
+                          "image": imageToCompress,
+                          "userUID": currentUserUID]
             
-            let values = ["location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID]
             
-            let newReportRef = REF_OCCURRENCES.childByAutoId()
-            newReportRef.setValue(values) { (error, ref) in
+            // Store the image in Firebase Storage
+//            let imageRef = Storage.storage().reference().child("images/\(UUID().uuidString).jpg")
+            let filename = NSUUID().uuidString
+            let storageRef = STORAGE_OCCURRENCES_IMAGES.child(filename)
+            storageRef.putData(imageToCompress, metadata: nil) { (metadata, error) in
                 if let error = error {
-                    print("Error adding new report: \(error.localizedDescription)")
+                    print("Error uploading image: \(error.localizedDescription)")
                 } else {
-                    print("Successfully added new report")
-                    self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
+                    // Get the download URL for the image and add it to the report data
+                    storageRef.downloadURL { (url, error) in
+                        if let error = error {
+                            print("Error getting download URL: \(error.localizedDescription)")
+                        } else {
+                            guard let imageUrl = url else { return }
+                            let values = ["location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
+
+                            // Store the report data in Firebase Realtime Database
+                            let newReportRef = REF_OCCURRENCES.childByAutoId()
+                            newReportRef.setValue(values) { (error, ref) in
+                                if let error = error {
+                                    print("Error adding new report: \(error.localizedDescription)")
+                                } else {
+                                    print("Successfully added new report")
+                                    self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
+
         
         
         let submitBtn = UIButton(type: .system, primaryAction: reportAction)
