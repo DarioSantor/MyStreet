@@ -128,12 +128,12 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                 return
             }
 
-            let values = ["location": location,
-                          "title": title,
-                          "type": type,
-                          "description": description,
-                          "imageUrl": imageToCompress,
-                          "userUID": currentUserUID]
+//            let values = ["location": location,
+//                          "title": title,
+//                          "type": type,
+//                          "description": description,
+//                          "imageUrl": imageToCompress,
+//                          "userUID": currentUserUID]
             
             
             // Store the image in Firebase Storage
@@ -308,7 +308,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        
+        locationManager.stopUpdatingLocation()
         print("user latitude = \(location.coordinate.latitude)")
         print("user longitude = \(location.coordinate.longitude)")
         
