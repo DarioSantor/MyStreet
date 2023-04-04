@@ -33,6 +33,7 @@ class OccurrenceListViewController: UIViewController {
         
         occurrenceTableView.translatesAutoresizingMaskIntoConstraints = false
         occurrenceTableView.showsVerticalScrollIndicator = false
+        occurrenceTableView.separatorStyle = .none
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
             occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -69,13 +70,14 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
+        cell.selectionStyle = .none
         cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let occurrence = occurrencesToDisplay[indexPath.row]
         let detailVC = OcurrenceDetailViewController(selectedOccurrence: occurrence)
-        detailVC.selectedIndexPath = indexPath
+//        detailVC.selectedIndexPath = indexPath
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

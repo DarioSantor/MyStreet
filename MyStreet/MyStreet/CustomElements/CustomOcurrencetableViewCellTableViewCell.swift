@@ -14,7 +14,7 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
     private let topView = UIView()
     private let bottomView = UIView()
     
-    private let descriptionLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondarySystemBackground
         label.font = UIFont.systemFont(ofSize: 22)
@@ -31,7 +31,7 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
         
         addSubview(topView)
         addSubview(bottomView)
-        topView.addSubview(descriptionLabel)
+        topView.addSubview(titleLabel)
         bottomView.addSubview(locationLabel)
         
         NSLayoutConstraint.activate([
@@ -60,8 +60,8 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
             bottomView.centerXAnchor.constraint(equalTo: centerXAnchor),
             bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
-            descriptionLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 12),
-            descriptionLabel.centerYAnchor.constraint(equalTo: topView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 12),
+            titleLabel.centerYAnchor.constraint(equalTo: topView.centerYAnchor),
             
             locationLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 12),
             locationLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
@@ -83,7 +83,7 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
     }
     
     func configure(occurrence: Occurrence) {
-        descriptionLabel.text = occurrence.description
+        titleLabel.text = occurrence.title
         locationLabel.text = occurrence.location
     }
 }

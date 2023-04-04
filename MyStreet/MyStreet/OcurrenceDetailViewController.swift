@@ -6,18 +6,31 @@
 //
 
 import UIKit
+import Kingfisher
 
 class OcurrenceDetailViewController: UIViewController {
     private let stateField = UILabel()
     private let observationField = CustomTextField(fieldType: .reportObservation)
     private let descriptonField = UITextView()
-    var selectedIndexPath: IndexPath?
+//    var selectedIndexPath: IndexPath?
+    private var reportImage = UIImageView(image: UIImage())
+
     
     private let selectedOccurrence: Occurrence
         
         init(selectedOccurrence: Occurrence) {
             self.selectedOccurrence = selectedOccurrence
+            
+            if let imageUrl = selectedOccurrence.imageUrl, let url = URL(string: imageUrl) {
+                self.reportImage.kf.setImage(with: url)
+            } else {
+                self.reportImage.image = UIImage(systemName: "photo.fill")
+            }
+
+            
+            
             super.init(nibName: nil, bundle: nil)
+            
         }
        
     
@@ -55,9 +68,9 @@ class OcurrenceDetailViewController: UIViewController {
         
         
         
-        let reportImage = UIImageView(image: UIImage())
         reportImage.backgroundColor = .secondarySystemBackground
         reportImage.layer.cornerRadius = 8
+        reportImage.contentMode = .scaleAspectFit
         
         
         let items = [
@@ -82,7 +95,7 @@ class OcurrenceDetailViewController: UIViewController {
             customCell.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
             customCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             customCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            customCell.heightAnchor.constraint(equalToConstant: 100),
+            customCell.heightAnchor.constraint(equalToConstant: 120),
             
             descriptonField.topAnchor.constraint(equalTo: customCell.bottomAnchor,constant:20),
             descriptonField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
@@ -109,6 +122,9 @@ class OcurrenceDetailViewController: UIViewController {
             checkImg.widthAnchor.constraint(equalToConstant: 40),
             checkImg.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+//        let url = URL(string: occu)
+//        reportImage.setImage(with: occurrence.set)
         
     }
 }

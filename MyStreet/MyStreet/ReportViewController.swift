@@ -130,7 +130,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                           "title": title,
                           "type": type,
                           "description": description,
-                          "image": imageToCompress,
+                          "imageUrl": imageToCompress,
                           "userUID": currentUserUID]
             
             
