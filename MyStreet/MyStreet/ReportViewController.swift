@@ -16,7 +16,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     private let reportDescriptonField = UITextView()
     var buttonText: String? = ""
     var locationManager: CLLocationManager!
-    
+    let reportImage = UIImageView(image: UIImage())
     
     private var keyboardHeight: CGFloat = 0.0
     
@@ -49,7 +49,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         locationImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
         locationImg.layer.cornerRadius = 8
         
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.locationImageTapped))
         locationImg.addGestureRecognizer(tapGR)
         locationImg.isUserInteractionEnabled = true
         
@@ -59,9 +59,11 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         reportDescriptonField.textColor = UIColor.lightGray
         reportDescriptonField.layer.cornerRadius = 8
         
-        let reportImage = UIImageView(image: UIImage())
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(reportImageTapped))
         reportImage.backgroundColor = .secondarySystemBackground
         reportImage.layer.cornerRadius = 8
+        reportImage.addGestureRecognizer(tapGestureRecognizer)
+        reportImage.isUserInteractionEnabled = true
         
         let typeAction = UIAction() {_ in
             let vc = OccurrenceTypeFilterViewControllerModal()
@@ -89,17 +91,17 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         
         
         let reportAction = UIAction {_ in
-            guard let location = self.reportLocationField.text else { return }
-            guard let title = self.reportTitleField.text else { return }
-            guard let type = self.buttonText else { return }
-            guard let description = self.reportDescriptonField.text else { return }
+            guard let location = self.reportLocationField.text,
+                  let title = self.reportTitleField.text,
+                  let type = self.buttonText,
+                  let description = self.reportDescriptonField.text,
+                  let currentUserUID = UserDefaults.standard.string(forKey: "myUID") else {
+                return
+            }
             
-            let values = ["location": location, "title": title, "type": type, "description": description]
+            let values = ["location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID]
             
-            let userDefaults = UserDefaults.standard
-            guard let uid = userDefaults.object(forKey: "myUID") as? String else { return }
-            
-            let newReportRef = REF_OCCURRENCES.child(uid).childByAutoId()
+            let newReportRef = REF_OCCURRENCES.childByAutoId()
             newReportRef.setValue(values) { (error, ref) in
                 if let error = error {
                     print("Error adding new report: \(error.localizedDescription)")
@@ -181,9 +183,33 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         
     }
     
-    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
-        
+    @objc func locationImageTapped() {
+        // TODO: Pick location in a map
     }
+    
+    @objc func reportImageTapped() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        print("image")
+
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action:UIAlertAction) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("Camera not available")
+            }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action:UIAlertAction) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        present(actionSheet, animated: true, completion: nil)
+    }
+
     
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -252,5 +278,19 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
     }
-    
 }
+
+extension ReportViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            reportImage.image = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+

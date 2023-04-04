@@ -10,28 +10,30 @@ import Foundation
 var localizationAuthorization = true
 
 
-struct Occurrence {
+struct Occurrence: Codable {
     let title: String
     let location: String
     let type: String
     let description: String
 }
 
+struct OccurrenceList: Codable {
+    var items: [Occurrence]
+}
+
 class OccurrenceService {
-
+    
     public static var occurrences: [Occurrence] = []
-
+    
     init() {
         getOccurrencesFromDatabase { occurrences in
             OccurrenceService.occurrences = occurrences
+            print("got occurrences from database:")
+            print(OccurrenceService.occurrences)
         }
-        
-        
-        print("getOccurrencesFromDatabase")
-        print(OccurrenceService.occurrences)
     }
     
-    // MARK: - func to get all Occurences at FireBase
+    // MARK: - func to get all Occurrences at FireBase
     public func getOccurrencesFromDatabase(completionHandler: @escaping ([Occurrence]) -> Void) {
         REF_OCCURRENCES.observeSingleEvent(of: .value) { (snapshot) in
             var occurrences = [Occurrence]()
@@ -40,22 +42,20 @@ class OccurrenceService {
                 return
             }
             
-            // TODO: - ir buscar os multiplos subvalores
-            
             for occurrence in snapshotValue {
-//                occurrenceData = REF_OCCURRENCES.child(key)
-                
-                guard let occurrenceData = occurrence.value as? [String: Any],
-                      let title = occurrenceData["title"] as? String,
-                      let location = occurrenceData["location"] as? String,
-                      let type = occurrenceData["type"] as? String,
-                      let description = occurrenceData["description"] as? String else {
+                guard let occurrenceData = occurrence.value as? [String: Any] else {
                     print("Invalid occurrence data")
-                    print("value \(occurrence)")
+                    print("value invalid \(occurrence)")
                     continue
                 }
-                let newOccurrence = Occurrence(title: title, location: location, type: type, description: description)
-                occurrences.append(newOccurrence)
+                
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: occurrenceData, options: [])
+                    let occurrence = try JSONDecoder().decode(Occurrence.self, from: jsonData)
+                    occurrences.append(occurrence)
+                } catch let error {
+                    print("Error decoding occurrence: \(error.localizedDescription)")
+                }
             }
             completionHandler(occurrences)
         }

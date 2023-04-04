@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController()
         window.rootViewController = navController
-        let viewController = localizationAuthorization ? ReportViewController() : LocalizationAuthViewController()
+        let viewController = localizationAuthorization ? LoginViewController() : LocalizationAuthViewController()
         navController.viewControllers = [viewController]
         self.window = window
         window.makeKeyAndVisible()
