@@ -95,7 +95,6 @@ class OccurrenceFilteredViewController: UIViewController {
     }
     
     @objc func didTapFilters() {
-        print("gotofiltrers")
         self.navigationController?.pushViewController(OccurrenceFilterViewController(), animated: true)
     }
     

@@ -57,7 +57,10 @@ class OccurrenceFilterViewController: UIViewController {
             
             print(typeAction.attributes.isEmpty)
             
-            self.navigationController?.pushViewController(OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: occurrences, title: self.setTypeButton.currentTitle!), animated: true)
+            
+            // TODO: - FAZER FILTRO NO SERVICE OCCURRENCE
+            
+//            self.navigationController?.pushViewController(OccurrenceFilteredViewController(typeFilter: .light, distanceFilter: .distance500, occurrences: occurrences, title: self.setTypeButton.currentTitle!), animated: true)
         }
         
         let image = UIImage(systemName: "arrowtriangle.down.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal)

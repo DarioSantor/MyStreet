@@ -10,11 +10,14 @@ import UIKit
 class OccurrenceListViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
+    let occurrenceService = OccurrenceService()
     var occurrencesToDisplay: [Occurrence] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getOccurrencesFromDatabase()
+
+//        occurrencesToDisplay = OccurrenceService.occurrences
+//        print("DDDDDDD\(occurrencesToDisplay)")
         view.backgroundColor = .systemBackground
         
         navigationItem.title = "Ver Ocorrências"
@@ -36,6 +39,15 @@ class OccurrenceListViewController: UIViewController {
             occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        DispatchQueue.main.async {
+                self.occurrenceService.getOccurrencesFromDatabase { occurrences in
+                    self.occurrencesToDisplay = occurrences
+                    self.occurrenceTableView.reloadData()
+                    print("table reloaded")
+                    print(self.occurrencesToDisplay)
+                }
+            }
     }
     
     @objc func didTapFilters() {
@@ -67,30 +79,6 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func getOccurrencesFromDatabase() {
-        REF_OCCURRENCES.observeSingleEvent(of: .value) { (snapshot) in
-            var occurrences = [Occurrence]()
-            guard let snapshotValue = snapshot.value as? [String: Any] else {
-                print("Snapshot value is nil")
-                return
-            }
-            for occurrence in snapshotValue {
-                guard let occurrenceData = occurrence.value as? [String: Any],
-                      let title = occurrenceData["title"] as? String,
-                      let location = occurrenceData["location"] as? String,
-                      let type = occurrenceData["type"] as? String,
-                      let description = occurrenceData["description"] as? String else {
-                    print("Invalid occurrence data")
-                    continue
-                }
-                let newOccurrence = Occurrence(title: title, location: location, type: type, description: description)
-                occurrences.append(newOccurrence)
-            }
-            self.occurrencesToDisplay = occurrences
-            print("DEBUG - getOccurrencesFunc\(self.occurrencesToDisplay)")
-            self.occurrenceTableView.reloadData()
-        }
-    }
 
 }
 
