@@ -17,7 +17,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     private let reportDescriptonField = UITextView()
     var buttonText: String? = ""
     var locationManager: CLLocationManager!
-    let reportImage = UIImageView(image: UIImage())
+    let reportImage = UIImageView(image: UIImage(systemName: "camera"))
+
     
     private var keyboardHeight: CGFloat = 0.0
     
@@ -65,6 +66,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         reportImage.layer.cornerRadius = 8
         reportImage.addGestureRecognizer(tapGestureRecognizer)
         reportImage.isUserInteractionEnabled = true
+        reportImage.contentMode = .scaleAspectFit
         
         let typeAction = UIAction() {_ in
             let vc = OccurrenceTypeFilterViewControllerModal()
