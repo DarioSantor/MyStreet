@@ -6,20 +6,34 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ReportViewController: UIViewController,UITextViewDelegate {
-
+class ReportViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
+    
     private let reportLocationField = CustomTextField(fieldType: .location)
     private let reportTitleField = CustomTextField(fieldType: .reportTitle)
     var setTypeButton = UIButton(frame: .zero)
     private let reportDescriptonField = UITextView()
     var buttonText: String? = ""
+    var locationManager: CLLocationManager!
+    
     
     private var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.startUpdatingLocation()
+        }
+        
         reportDescriptonField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -30,11 +44,15 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         let locationImg = UIImageView(image: UIImage(named: "gps")?.withTintColor(UIColor.label))
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
-
+        
         locationImg.backgroundColor = .secondarySystemBackground
         locationImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
         locationImg.layer.cornerRadius = 8
-
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        locationImg.addGestureRecognizer(tapGR)
+        locationImg.isUserInteractionEnabled = true
+        
         reportDescriptonField.backgroundColor = .secondarySystemBackground
         reportDescriptonField.font = UIFont.systemFont(ofSize: 20)
         reportDescriptonField.text = " Descrição"
@@ -44,7 +62,6 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         let reportImage = UIImageView(image: UIImage())
         reportImage.backgroundColor = .secondarySystemBackground
         reportImage.layer.cornerRadius = 8
-        
         
         let typeAction = UIAction() {_ in
             let vc = OccurrenceTypeFilterViewControllerModal()
@@ -63,13 +80,13 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         setTypeButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         setTypeButton.setImage(image, for: .normal)
         setTypeButton.layer.cornerRadius = 8
-
+        
         setTypeButton.setTitleColor(UIColor.label, for: .normal)
         setTypeButton.imageView?.trailingAnchor.constraint(equalTo: setTypeButton.trailingAnchor, constant: -20.0).isActive = true
         setTypeButton.imageView?.centerYAnchor.constraint(equalTo: setTypeButton.centerYAnchor, constant: 0.0).isActive = true
         setTypeButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
-
-
+        
+        
         
         let reportAction = UIAction {_ in
             guard let location = self.reportLocationField.text else { return }
@@ -92,7 +109,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
                 }
             }
         }
-
+        
         
         let submitBtn = UIButton(type: .system, primaryAction: reportAction)
         submitBtn.setTitle("SUBMETER", for: .normal)
@@ -110,7 +127,7 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             reportImage,
             submitBtn,
             setTypeButton
-
+            
         ]
         
         for item in items {
@@ -133,8 +150,8 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             locationImg.bottomAnchor.constraint(equalTo: reportLocationField.bottomAnchor),
             locationImg.heightAnchor.constraint(equalToConstant:40),
             locationImg.widthAnchor.constraint(equalToConstant:40),
-
-
+            
+            
             reportTitleField.topAnchor.constraint(equalTo: reportLocationField.bottomAnchor,constant:10),
             reportTitleField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportTitleField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
@@ -160,10 +177,15 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             submitBtn.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:40),
             submitBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             submitBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-
         ])
         
     }
+    
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
@@ -186,14 +208,14 @@ class ReportViewController: UIViewController,UITextViewDelegate {
             self.view.frame.origin.y = -self.keyboardHeight
         }
     }
-        
+    
     @objc func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
-    
-       
-	}
+        
+        
+    }
     @objc func typeNotificationReceived(_ notification: Notification) {
         guard let text = notification.userInfo?["text"] as? String else { return }
         print ("text: \(text)")
@@ -201,5 +223,34 @@ class ReportViewController: UIViewController,UITextViewDelegate {
         setTypeButton.setTitle(text, for: .normal)
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        
+        print("user latitude = \(location.coordinate.latitude)")
+        print("user longitude = \(location.coordinate.longitude)")
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if (error != nil){
+                print("error in reverseGeocode")
+            }
+            let placemark = placemarks! as [CLPlacemark]
+            if placemark.count>0{
+                let placemark = placemarks![0]
+                print(placemark.subLocality!)
+                print(placemark.postalCode!)
+                print(placemark.locality!)
+                print(placemark.administrativeArea!)
+                print(placemark.country!)
+                DispatchQueue.main.async {
+                    self.reportLocationField.text = placemark.postalCode!
+                }
+            }
+        }
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
+    }
+    
 }
-

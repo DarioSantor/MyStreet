@@ -489,6 +489,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyStreet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyStreet;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -518,6 +519,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyStreet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyStreet;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
