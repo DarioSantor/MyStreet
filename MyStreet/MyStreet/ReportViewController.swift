@@ -19,13 +19,12 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     var locationManager: CLLocationManager!
     let reportImage = UIImageView(image: UIImage(systemName: "camera"))
     var hasRequestedAuthorization = false
-
-    
     private var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         view.backgroundColor = .systemBackground
         navigationItem.title = "Reportar Ocorrência"
         
@@ -37,9 +36,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         requestLocation()
         
         reportDescriptonField.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let locationImg = UIImageView(image: UIImage(named: "gps")?.withTintColor(UIColor.label))
         
@@ -155,31 +151,28 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         
         NSLayoutConstraint.activate([
             
-            reportLocationField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:20),
+            reportLocationField.topAnchor.constraint(equalTo: view.topAnchor,constant:20),
             reportLocationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportLocationField.trailingAnchor.constraint(equalTo: locationImg.leadingAnchor,constant:-20),
             reportLocationField.heightAnchor.constraint(equalToConstant:40),
             
-            locationImg.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:20),
+            locationImg.topAnchor.constraint(equalTo: view.topAnchor, constant:20),
             locationImg.leadingAnchor.constraint(equalTo: reportLocationField.trailingAnchor,constant:20),
             locationImg.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-            locationImg.bottomAnchor.constraint(equalTo: reportLocationField.bottomAnchor),
             locationImg.heightAnchor.constraint(equalToConstant:40),
             locationImg.widthAnchor.constraint(equalToConstant:40),
             
             reportTitleField.topAnchor.constraint(equalTo: reportLocationField.bottomAnchor,constant:10),
             reportTitleField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportTitleField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-            reportTitleField.bottomAnchor.constraint(equalTo: setTypeButton.topAnchor,constant:-10),
             reportTitleField.heightAnchor.constraint(equalToConstant:40),
             
-            setTypeButton.topAnchor.constraint(equalTo: reportTitleField.bottomAnchor),
+            setTypeButton.topAnchor.constraint(equalTo: reportTitleField.bottomAnchor, constant:10),
             setTypeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             setTypeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             setTypeButton.heightAnchor.constraint(equalToConstant: 40),
-            setTypeButton.bottomAnchor.constraint(equalTo: reportDescriptonField.topAnchor,constant:-10),
             
-            reportDescriptonField.topAnchor.constraint(equalTo: setTypeButton.bottomAnchor,constant:40),
+            reportDescriptonField.topAnchor.constraint(equalTo: setTypeButton.bottomAnchor,constant:10),
             reportDescriptonField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportDescriptonField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             reportDescriptonField.heightAnchor.constraint(equalToConstant:200),
@@ -234,20 +227,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             textView.text = " Descrição"
             textView.textColor = UIColor.lightGray
             textView.alpha = 0.7
-        }
-    }
-
-    @objc func keyboardWillShow(_ notification: Notification) {
-        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
-        keyboardHeight = keyboardSize.cgRectValue.height
-        UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = -self.keyboardHeight
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = 0
         }
     }
     
@@ -338,4 +317,3 @@ extension ReportViewController: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true, completion: nil)
     }
 }
-

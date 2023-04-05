@@ -100,8 +100,6 @@ class LoginViewController: UIViewController {
             registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             registerButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            
         ])
     }
     
