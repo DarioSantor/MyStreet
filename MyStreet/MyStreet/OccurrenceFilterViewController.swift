@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class OccurrenceFilterViewController: UIViewController {
+class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
@@ -32,6 +33,11 @@ class OccurrenceFilterViewController: UIViewController {
     private var typeFilter: FilterOccurrenceType = .none
     private var distanceFilter: FilterOccurrenceDistance = .none
     
+    var locationManager: CLLocationManager!
+    var hasRequestedAuthorization = false
+    var userCurrentLocation: CLLocation?
+
+    
 //    var setTypeTitle: String!
     var setTypeButton = UIButton(frame: .zero)
     var setRadiusButton = UIButton(frame: .zero)
@@ -48,6 +54,26 @@ class OccurrenceFilterViewController: UIViewController {
         }
     }
     
+    func filterOccurrencesDistance(from occurrences: [Occurrence]) -> [Occurrence] {
+        switch distanceFilter {
+        case .distance500, .distance1000, .distance2000, .distance5000, .distance10000:
+            //filtrar
+            var filterOccurrences: [Occurrence] = []
+            for occ in self.occurrencesFiltered {
+                let point = CLLocation(latitude: Double(occ.latitude)!, longitude: Double(occ.longitude)!)
+                if point.distance(from: userCurrentLocation!) < Double(distanceFilter.rawValue)! {
+                    filterOccurrences.append(occ)
+                    print(occ.title)
+                }
+            }
+            return filterOccurrences
+        default:
+            return occurrences
+        }
+    }
+    
+
+    
     
     init(allOccurrences: [Occurrence]) {
         self.occurrencesToFilter = allOccurrences
@@ -61,6 +87,15 @@ class OccurrenceFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // MARK: - GET LOCATION
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.requestAlwaysAuthorization()
+        
+        requestLocation()
         
         navigationController?.navigationBar.tintColor = .label
 //        navigationItem.setHidesBackButton(true, animated: false)
@@ -124,15 +159,19 @@ class OccurrenceFilterViewController: UIViewController {
             case "5 Kilómetros":
                 self.distanceFilter = .distance5000
             case "10 Kilómetros":
-                self.distanceFilter = .distance1000
+                self.distanceFilter = .distance10000
             default:
                 self.distanceFilter = .none
             }
+            
+            
             
             let filterTitles = "\(self.typeFilter.rawValue) \t \(self.distanceFilter.rawValue)"
             
             // TODO: - EXECUTE FILTER
             self.occurrencesFiltered = self.filterOccurrencesType(from: self.occurrencesToFilter)
+            
+            self.occurrencesFiltered = self.filterOccurrencesDistance(from: self.occurrencesFiltered)
             
             
             print("self.setTypeButton.currentTitle!\(self.setTypeButton.currentTitle!)")
@@ -215,5 +254,78 @@ class OccurrenceFilterViewController: UIViewController {
         guard let text = notification.userInfo?["text"] as? String else { return }
         print ("text: \(text)")
         setRadiusButton.setTitle(text, for: .normal)
+    }
+    
+    func requestLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            let authorizationStatus = locationManager.authorizationStatus
+            switch authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.startUpdatingLocation()
+            case .notDetermined:
+                if !hasRequestedAuthorization {
+                    hasRequestedAuthorization = true
+                    locationManager.requestWhenInUseAuthorization()
+                }
+            case .denied, .restricted:
+                print("User didn't allow localization service.")
+                break
+            @unknown default:
+                print("Something went wrong.")
+                break
+            }
+        }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("User didn't allow localization service.")
+            break
+        case .notDetermined:
+            // Do nothing
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+}
+
+extension OccurrenceFilterViewController {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        locationManager.stopUpdatingLocation()
+        print("user latitude = \(location.coordinate.latitude)")
+        print("user longitude = \(location.coordinate.longitude)")
+        print("user location \(location)")
+//        self.occurrenceLatitude = String(format: "%f", location.coordinate.latitude)
+//        self.occurrenceLongitude = String(format: "%f", location.coordinate.longitude)
+        self.userCurrentLocation = location
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if (error != nil){
+                print("error in reverseGeocode")
+            }
+            let placemark = placemarks! as [CLPlacemark]
+            if placemark.count>0{
+                let placemark = placemarks![0]
+                print(placemark.subLocality!)
+                print(placemark.postalCode!)
+                print(placemark.locality!)
+                print(placemark.administrativeArea!)
+                print(placemark.country!)
+
+            }
+        }
+    }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
     }
 }

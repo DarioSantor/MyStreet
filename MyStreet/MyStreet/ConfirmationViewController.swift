@@ -18,7 +18,7 @@ class ConfirmationViewController: UIViewController {
         
         let confirmationText = UILabel()
         confirmationText.translatesAutoresizingMaskIntoConstraints = false
-        confirmationText.text = "A sua ocorrência foi submetida com êxito. vamos mantê-lo informado acerca da resolução desta situação. Obrigado pelo seu contributo."
+        confirmationText.text = "A sua ocorrência foi submetida com êxito. Vamos mantê-lo informado acerca da resolução desta situação. Obrigado pelo seu contributo."
         confirmationText.textAlignment = .center
         confirmationText.font = UIFont.systemFont(ofSize: 20.0)
         confirmationText.textColor = .label
