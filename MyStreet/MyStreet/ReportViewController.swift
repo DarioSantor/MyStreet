@@ -27,6 +27,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Reportar Ocorrência"
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -40,8 +41,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let title = UILabel()
-        title.text = "Reportar Ocorrência"
         let locationImg = UIImageView(image: UIImage(named: "gps")?.withTintColor(UIColor.label))
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.typeNotificationReceived(_:)), name: NSNotification.Name(rawValue: "myTypeKey"), object: nil)
@@ -140,7 +139,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         submitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         
         let items = [
-            title,
             reportLocationField,
             locationImg,
             reportTitleField,
@@ -156,15 +154,13 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         }
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            reportLocationField.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
+            reportLocationField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:20),
             reportLocationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportLocationField.trailingAnchor.constraint(equalTo: locationImg.leadingAnchor,constant:-20),
             reportLocationField.heightAnchor.constraint(equalToConstant:40),
             
-            locationImg.topAnchor.constraint(equalTo: title.bottomAnchor, constant:20),
+            locationImg.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:20),
             locationImg.leadingAnchor.constraint(equalTo: reportLocationField.trailingAnchor,constant:20),
             locationImg.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             locationImg.bottomAnchor.constraint(equalTo: reportLocationField.bottomAnchor),
@@ -229,7 +225,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.label
         }
     }
     
