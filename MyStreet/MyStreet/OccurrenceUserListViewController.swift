@@ -12,20 +12,13 @@ class OccurrenceUserListViewController: UIViewController {
     private let occurrenceTableView = UITableView()
     let occurrenceService = OccurrenceService()
     var occurrencesToDisplay: [Occurrence] = []
-//    var occurrences2 = [Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida"),
-//                       Occurrence(title:"Lâmpada partida", location: "Rua da Frente", type: "Iluminação Pública", description: "Lâmpada partida")]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
         
         occurrenceTableView.delegate = self
         occurrenceTableView.dataSource = self
@@ -51,10 +44,10 @@ class OccurrenceUserListViewController: UIViewController {
             }
     }
     
-    @objc func didTapFilters() {
-        print("gotofiltrers")
-        self.navigationController?.pushViewController(OccurrenceFilterViewController(), animated: true)
-    }
+//    @objc func didTapFilters() {
+//        print("gotofiltrers")
+//        self.navigationController?.pushViewController(OccurrenceFilterViewController(allOccurrences: occurrencesToDisplay), animated: true)
+//    }
 }
 
 extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewDataSource {

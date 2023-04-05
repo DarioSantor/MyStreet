@@ -13,6 +13,11 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     
     private let reportLocationField = CustomTextField(fieldType: .location)
     private let reportTitleField = CustomTextField(fieldType: .reportTitle)
+    
+    private var occurrenceLatitude: String?
+    private var occurrenceLongitude: String?
+    
+    
     var setTypeButton = UIButton(frame: .zero)
     private let reportDescriptonField = UITextView()
     var buttonText: String? = ""
@@ -86,7 +91,9 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         setTypeButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
         
         let reportAction = UIAction {_ in
-            guard let location = self.reportLocationField.text,
+            guard let latitude = self.occurrenceLatitude,
+                  let longitude = self.occurrenceLongitude,
+                  let location = self.reportLocationField.text,
                   let title = self.reportTitleField.text,
                   let type = self.buttonText,
                   let description = self.reportDescriptonField.text,
@@ -109,7 +116,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                             print("Error getting download URL: \(error.localizedDescription)")
                         } else {
                             guard let imageUrl = url else { return }
-                            let values = ["location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
+                            let values = ["latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
 
                             // Store the report data in Firebase Realtime Database
                             let newReportRef = REF_OCCURRENCES.childByAutoId()
@@ -278,6 +285,9 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         locationManager.stopUpdatingLocation()
         print("user latitude = \(location.coordinate.latitude)")
         print("user longitude = \(location.coordinate.longitude)")
+        print("user location \(location)")
+        self.occurrenceLatitude = String(format: "%f", location.coordinate.latitude)
+        self.occurrenceLongitude = String(format: "%f", location.coordinate.longitude)
         
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in

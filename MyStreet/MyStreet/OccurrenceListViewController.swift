@@ -53,7 +53,7 @@ class OccurrenceListViewController: UIViewController {
     
     @objc func didTapFilters() {
         print("gotofiltrers")
-        self.navigationController?.pushViewController(OccurrenceFilterViewController(), animated: true)
+        self.navigationController?.pushViewController(OccurrenceFilterViewController(allOccurrences: occurrencesToDisplay), animated: true)
     }
 }
 

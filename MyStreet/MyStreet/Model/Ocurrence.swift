@@ -11,6 +11,7 @@ var localizationAuthorization = true
 
 
 struct Occurrence: Codable {
+    
     let title: String
     let location: String
     let type: String

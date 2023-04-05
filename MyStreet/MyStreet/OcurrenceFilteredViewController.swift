@@ -11,62 +11,29 @@ class OccurrenceFilteredViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
     
-    enum FilterOccurrenceType {
-        case light
-        case garbage
-        case animals
-        case asfalt
-        case other
-    }
     
-    enum FilterOccurrenceDistance: Int {
-        case distance500 = 500
-        case distance1000 = 1000
-        case distance2000 = 2000
-        case distance5000 = 5000
-        case distance10000 = 10000
-    }
     
-    private let typeFilter: FilterOccurrenceType
-    private let distanceFilter: FilterOccurrenceDistance
+//    private let typeFilter: FilterOccurrenceType
+//    private let distanceFilter: FilterOccurrenceDistance
     
     private var occurrencesToDisplay: [Occurrence] = []
 
+    func setTitle(title: String) {
+        self.navigationItem.title = title
+        print("set title runned")
+    }
     
-    init(typeFilter: FilterOccurrenceType, distanceFilter: FilterOccurrenceDistance, occurrences: [Occurrence], title: String) {
-        self.typeFilter = typeFilter
-        self.distanceFilter = distanceFilter
+    init(filteredOccurrences: [Occurrence]) {
+//        self.typeFilter = typeFilter
+//        self.distanceFilter = distanceFilter
+        
+        self.occurrencesToDisplay = filteredOccurrences
+        
+//        print("occurrences\t\(filteredOccurrences)")
         super.init(nibName: nil, bundle: nil)
-        self.occurrencesToDisplay = filteredOccurrences(from: occurrences)
-        print(title)
-        
-        navigationItem.title = title
-
+//        self.occurrencesToDisplay = filteredOccurrences(from: allOccurrences)
         
     }
-    
-    func filteredOccurrences(from occurrences: [Occurrence]) -> [Occurrence] {
-        switch typeFilter {
-        case .light:
-            let filteredOccurrences = occurrences.filter { $0.type == "Iluminação Pública" }
-            return filteredOccurrences
-        case .garbage:
-            let filteredOccurrences = occurrences.filter { $0.type == "Recolhe de Lixo" }
-            return filteredOccurrences
-        case .animals:
-            let filteredOccurrences = occurrences.filter { $0.type == "Animais Abandonados" }
-            return filteredOccurrences
-        case .asfalt:
-            let filteredOccurrences = occurrences.filter { $0.type == "Piso em Mau Estado" }
-            return filteredOccurrences
-        case .other:
-            let filteredOccurrences = occurrences.filter { $0.type == "Outros" }
-            return filteredOccurrences
-        default:
-            return occurrences
-        }
-    }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -94,9 +61,9 @@ class OccurrenceFilteredViewController: UIViewController {
         
     }
     
-    @objc func didTapFilters() {
-        self.navigationController?.pushViewController(OccurrenceFilterViewController(), animated: true)
-    }
+//    @objc func didTapFilters() {
+//        self.navigationController?.pushViewController(OccurrenceFilterViewController(), animated: true)
+//    }
     
     
     
