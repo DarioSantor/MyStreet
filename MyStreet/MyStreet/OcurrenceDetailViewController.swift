@@ -41,10 +41,9 @@ class OcurrenceDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Ver Ocorrências"
         let customCell = CustomOcurrencetableViewCellTableViewCell()
         customCell.configure(occurrence: selectedOccurrence)
-        let title = UILabel()
-        title.text = "Ver Ocorrências"
         let checkImg = UIImageView(image: UIImage(named:"checkmark"))
 
         checkImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
@@ -74,7 +73,6 @@ class OcurrenceDetailViewController: UIViewController {
         
         
         let items = [
-            title,
             stateField,
             descriptonField,
             reportImage,
@@ -89,10 +87,8 @@ class OcurrenceDetailViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            customCell.topAnchor.constraint(equalTo: title.bottomAnchor,constant:20),
+            customCell.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:20),
             customCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             customCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             customCell.heightAnchor.constraint(equalToConstant: 120),
