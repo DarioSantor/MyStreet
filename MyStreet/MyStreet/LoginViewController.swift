@@ -41,6 +41,8 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .systemBackground
         // forma de esconder o back button e texto
         navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.backButtonTitle = ""
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)

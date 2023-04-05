@@ -16,13 +16,11 @@ class RegisterViewController: UIViewController {
     private let emailRegisterField = CustomTextField(fieldType: .email)
     private let passwordRegisterField = CustomTextField(fieldType: .password)
     private let confirmPassRegisterField = CustomTextField(fieldType: .confirmPass)
-    
     private var keyboardHeight: CGFloat = 0.0
    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        // forma de dar cor diferente aos item do navigation bar
         navigationController?.navigationBar.tintColor = .label
         
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
