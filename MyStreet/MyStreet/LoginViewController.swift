@@ -36,7 +36,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         view.backgroundColor = .systemBackground
         // forma de esconder o back button e texto
         navigationItem.setHidesBackButton(true, animated: false)
@@ -73,7 +74,7 @@ class LoginViewController: UIViewController {
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logo.widthAnchor.constraint(equalToConstant: 280),
             logo.heightAnchor.constraint(equalToConstant: 250),
-//            
+//
             emailLoginField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 20),
             emailLoginField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             emailLoginField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
