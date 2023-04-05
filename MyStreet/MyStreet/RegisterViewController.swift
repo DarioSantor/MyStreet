@@ -25,6 +25,9 @@ class RegisterViewController: UIViewController {
         // forma de dar cor diferente aos item do navigation bar
         navigationController?.navigationBar.tintColor = .label
         
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+        
         let emailErrorLabel = UILabel()
         emailErrorLabel.textColor = .systemRed
         emailErrorLabel.attributedText = NSAttributedString(string: "Email já registado.", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12.0)])
