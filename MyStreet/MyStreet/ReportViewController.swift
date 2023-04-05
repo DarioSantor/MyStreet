@@ -151,7 +151,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         
         NSLayoutConstraint.activate([
             
-            reportLocationField.topAnchor.constraint(equalTo: view.topAnchor,constant:20),
+            reportLocationField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:20),
             reportLocationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             reportLocationField.trailingAnchor.constraint(equalTo: locationImg.leadingAnchor,constant:-20),
             reportLocationField.heightAnchor.constraint(equalToConstant:40),
