@@ -20,7 +20,6 @@ class OcurrenceDetailViewController: UIViewController {
         
         init(selectedOccurrence: Occurrence) {
             self.selectedOccurrence = selectedOccurrence
-            
             if let imageUrl = selectedOccurrence.imageUrl, let url = URL(string: imageUrl) {
                 self.reportImage.kf.setImage(with: url)
             } else {

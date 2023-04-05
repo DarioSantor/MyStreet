@@ -116,14 +116,17 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                             print("Error getting download URL: \(error.localizedDescription)")
                         } else {
                             guard let imageUrl = url else { return }
-                            let values = ["latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
+                            let newReportRef = REF_OCCURRENCES.childByAutoId()
+                            let values = ["ref": newReportRef.key, "latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
 
                             // Store the report data in Firebase Realtime Database
-                            let newReportRef = REF_OCCURRENCES.childByAutoId()
+                            
                             newReportRef.setValue(values) { (error, ref) in
                                 if let error = error {
                                     print("Error adding new report: \(error.localizedDescription)")
                                 } else {
+                                    print("DEBUG - new report ref \(newReportRef.key!)")
+                                    print("DEBUG - ref \(ref)")
                                     print("Successfully added new report")
                                     self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
                                 }
