@@ -12,7 +12,6 @@ class OccurrenceFilteredViewController: UIViewController {
     private let occurrenceTableView = UITableView()
     
     
-    
 //    private let typeFilter: FilterOccurrenceType
 //    private let distanceFilter: FilterOccurrenceDistance
     
@@ -41,9 +40,10 @@ class OccurrenceFilteredViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        occurrenceTableView.separatorStyle = .none
+
         view.backgroundColor = .systemBackground
-        
+        navigationItem.backButtonTitle = ""
         occurrenceTableView.delegate = self
         occurrenceTableView.dataSource = self
         occurrenceTableView.register(CustomOcurrencetableViewCellTableViewCell.self, forCellReuseIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier)
@@ -85,5 +85,11 @@ extension OccurrenceFilteredViewController: UITableViewDelegate, UITableViewData
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
         cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let occurrence = occurrencesToDisplay[indexPath.row]
+        let detailVC = OcurrenceDetailViewController(selectedOccurrence: occurrence)
+//        detailVC.selectedIndexPath = indexPath
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

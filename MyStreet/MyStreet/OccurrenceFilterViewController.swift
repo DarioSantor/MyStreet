@@ -14,7 +14,7 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
     
     enum FilterOccurrenceType: String {
         case light = "Iluminação Pública"
-        case garbage = "Recolhe de Lixo"
+        case garbage = "Recolha de Lixo"
         case animals = "Animais Abandonados"
         case asfalt = "Piso em Mau Estado"
         case other = "Outros"
@@ -87,7 +87,6 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // MARK: - GET LOCATION
         locationManager = CLLocationManager()
@@ -291,7 +290,6 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
             break
         }
     }
-    
 }
 
 extension OccurrenceFilterViewController {
@@ -322,8 +320,6 @@ extension OccurrenceFilterViewController {
             }
         }
     }
-    
-    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
