@@ -18,6 +18,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     var buttonText: String? = ""
     var locationManager: CLLocationManager!
     let reportImage = UIImageView(image: UIImage(systemName: "camera"))
+    var hasRequestedAuthorization = false
 
     
     private var keyboardHeight: CGFloat = 0.0
@@ -32,9 +33,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestAlwaysAuthorization()
         
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.startUpdatingLocation()
-        }
+        requestLocation()
         
         reportDescriptonField.delegate = self
         
@@ -91,32 +90,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         setTypeButton.imageView?.centerYAnchor.constraint(equalTo: setTypeButton.centerYAnchor, constant: 0.0).isActive = true
         setTypeButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        
-//        let reportAction = UIAction {_ in
-//            guard let location = self.reportLocationField.text,
-//                  let title = self.reportTitleField.text,
-//                  let type = self.buttonText,
-//                  let description = self.reportDescriptonField.text,
-//                  let imageToCompress = self.reportImage.image?.jpegData(compressionQuality: 0.5),
-//                  let currentUserUID = UserDefaults.standard.string(forKey: "myUID") else {
-//                return
-//            }
-//
-//
-//
-//            let newReportRef = REF_OCCURRENCES.childByAutoId()
-//            newReportRef.setValue(values) { (error, ref) in
-//                if let error = error {
-//                    print("Error adding new report: \(error.localizedDescription)")
-//                } else {
-//                    print("Successfully added new report")
-//                    self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
-//                }
-//            }
-//        }
-        
-        
         let reportAction = UIAction {_ in
             guard let location = self.reportLocationField.text,
                   let title = self.reportTitleField.text,
@@ -127,17 +100,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                 print("early exit")
                 return
             }
-
-//            let values = ["location": location,
-//                          "title": title,
-//                          "type": type,
-//                          "description": description,
-//                          "imageUrl": imageToCompress,
-//                          "userUID": currentUserUID]
-            
             
             // Store the image in Firebase Storage
-//            let imageRef = Storage.storage().reference().child("images/\(UUID().uuidString).jpg")
             let filename = NSUUID().uuidString
             let storageRef = STORAGE_OCCURRENCES_IMAGES.child(filename)
             storageRef.putData(imageToCompress, metadata: nil) { (metadata, error) in
@@ -167,8 +131,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                 }
             }
         }
-
-        
         
         let submitBtn = UIButton(type: .system, primaryAction: reportAction)
         submitBtn.setTitle("SUBMETER", for: .normal)
@@ -186,7 +148,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             reportImage,
             submitBtn,
             setTypeButton
-            
         ]
         
         for item in items {
@@ -209,7 +170,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             locationImg.bottomAnchor.constraint(equalTo: reportLocationField.bottomAnchor),
             locationImg.heightAnchor.constraint(equalToConstant:40),
             locationImg.widthAnchor.constraint(equalToConstant:40),
-            
             
             reportTitleField.topAnchor.constraint(equalTo: reportLocationField.bottomAnchor,constant:10),
             reportTitleField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
@@ -237,7 +197,6 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             submitBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
             submitBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
         ])
-        
     }
     
     @objc func locationImageTapped() {
@@ -267,14 +226,13 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         present(actionSheet, animated: true, completion: nil)
     }
 
-    
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = UIColor.black
         }
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = " Descrição"
@@ -282,8 +240,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             textView.alpha = 0.7
         }
     }
-    
-    
+
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue else { return }
         keyboardHeight = keyboardSize.cgRectValue.height
@@ -296,14 +253,49 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
-        
-        
     }
+    
     @objc func typeNotificationReceived(_ notification: Notification) {
         guard let text = notification.userInfo?["text"] as? String else { return }
         print ("text: \(text)")
         buttonText = text
         setTypeButton.setTitle(text, for: .normal)
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("User didn't allow localization service.")
+            break
+        case .notDetermined:
+            // Do nothing
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+    func requestLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            let authorizationStatus = locationManager.authorizationStatus
+            switch authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.startUpdatingLocation()
+            case .notDetermined:
+                if !hasRequestedAuthorization {
+                    hasRequestedAuthorization = true
+                    locationManager.requestWhenInUseAuthorization()
+                }
+            case .denied, .restricted:
+                print("User didn't allow localization service.")
+                break
+            @unknown default:
+                print("Something went wrong.")
+                break
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -330,8 +322,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                 }
             }
         }
-        
     }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
     }
