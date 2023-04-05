@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     
     private let logo = UIImageView(image: UIImage(named: "logo"))
     
-    private var isUserAdmin: Bool = false
+    var isUserAdmin: Bool = false
     private let emailLoginField = CustomTextField(fieldType: .email)
     private let passwordLoginField = CustomTextField(fieldType: .password)
     private let loginButton = CustomButton(title: "LOGIN", bgColor: .systemGreen)

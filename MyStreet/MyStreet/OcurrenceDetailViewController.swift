@@ -63,9 +63,6 @@ class OcurrenceDetailViewController: UIViewController {
         stateField.font = UIFont.systemFont(ofSize: 20)
         stateField.layer.cornerRadius = 8
         stateField.clipsToBounds = true
-
-        
-        
         
         reportImage.backgroundColor = .secondarySystemBackground
         reportImage.layer.cornerRadius = 8
@@ -73,10 +70,8 @@ class OcurrenceDetailViewController: UIViewController {
         
         
         let items = [
-            stateField,
             descriptonField,
             reportImage,
-            checkImg,
             observationField,
             customCell,
         ]
@@ -108,16 +103,24 @@ class OcurrenceDetailViewController: UIViewController {
             observationField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             observationField.heightAnchor.constraint(equalToConstant: 40),
             
-            stateField.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
-            stateField.heightAnchor.constraint(equalToConstant:40),
-            stateField.widthAnchor.constraint(equalToConstant: 290),
-            stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-            
-            checkImg.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
-            checkImg.leadingAnchor.constraint(equalTo: stateField.trailingAnchor,constant:20),
-            checkImg.widthAnchor.constraint(equalToConstant: 40),
-            checkImg.heightAnchor.constraint(equalToConstant: 40)
         ])
+        var checkUserType = LoginViewController()
+        if checkUserType.isUserAdmin {
+            view.addSubview(stateField)
+            stateField.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(checkImg)
+            checkImg.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                checkImg.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
+                checkImg.leadingAnchor.constraint(equalTo: stateField.trailingAnchor,constant:20),
+                checkImg.widthAnchor.constraint(equalToConstant: 40),
+                checkImg.heightAnchor.constraint(equalToConstant: 40),
+                stateField.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
+                stateField.heightAnchor.constraint(equalToConstant:40),
+                stateField.widthAnchor.constraint(equalToConstant: 290),
+                stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+            ])
+        }
         
 //        let url = URL(string: occu)
 //        reportImage.setImage(with: occurrence.set)
