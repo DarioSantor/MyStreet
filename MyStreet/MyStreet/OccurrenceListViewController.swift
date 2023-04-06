@@ -65,14 +65,14 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG - \(occurrencesToDisplay.count)")
-        if occurrencesToDisplay.isEmpty {
-            let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                self.navigationController?.popViewController(animated: true)
-            }
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        }
+//        if occurrencesToDisplay.isEmpty {
+//            let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//        }
 
         return occurrencesToDisplay.count
     }

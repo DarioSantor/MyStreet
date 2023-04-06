@@ -6,17 +6,22 @@
 //
 
 import UIKit
+import Firebase
 import Kingfisher
 
 class OcurrenceDetailViewController: UIViewController {
-    private let stateField = UILabel()
+    private var stateField = UILabel()
     private let observationField = CustomTextField(fieldType: .reportObservation)
     private let descriptonField = UITextView()
 //    var selectedIndexPath: IndexPath?
     private var reportImage = UIImageView(image: UIImage())
 
     
-    private let selectedOccurrence: Occurrence
+    private var selectedOccurrence: Occurrence
+    
+    private var checkImg = UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(.red))
+
+    
         
         init(selectedOccurrence: Occurrence) {
             self.selectedOccurrence = selectedOccurrence
@@ -43,7 +48,8 @@ class OcurrenceDetailViewController: UIViewController {
         navigationItem.title = "Ver Ocorrências"
         let customCell = CustomOcurrencetableViewCellTableViewCell()
         customCell.configure(occurrence: selectedOccurrence)
-        let checkImg = UIImageView(image: UIImage(systemName:"checkmark.circle.fill"))
+
+    
 
         checkImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
         checkImg.backgroundColor = .secondarySystemBackground
@@ -55,13 +61,13 @@ class OcurrenceDetailViewController: UIViewController {
         descriptonField.text = selectedOccurrence.description
         descriptonField.textColor = UIColor.lightGray
         descriptonField.layer.cornerRadius = 8
-        
-        stateField.text = "  Estado"
-        stateField.backgroundColor = .secondarySystemBackground
+    
+        stateField.textAlignment = .center
         stateField.textColor = UIColor.lightGray
         stateField.font = UIFont.systemFont(ofSize: 20)
         stateField.layer.cornerRadius = 8
         stateField.clipsToBounds = true
+        configureStateField()
         
         reportImage.backgroundColor = .secondarySystemBackground
         reportImage.layer.cornerRadius = 8
@@ -111,18 +117,50 @@ class OcurrenceDetailViewController: UIViewController {
             checkImg.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 checkImg.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
-                checkImg.leadingAnchor.constraint(equalTo: stateField.trailingAnchor,constant:20),
+                checkImg.trailingAnchor.constraint(equalTo: observationField.trailingAnchor),
                 checkImg.widthAnchor.constraint(equalToConstant: 40),
                 checkImg.heightAnchor.constraint(equalToConstant: 40),
                 stateField.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
-                stateField.heightAnchor.constraint(equalToConstant:40),
-                stateField.widthAnchor.constraint(equalToConstant: 290),
+                stateField.heightAnchor.constraint(equalTo: checkImg.heightAnchor),
                 stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+                stateField.trailingAnchor.constraint(equalTo: checkImg.trailingAnchor),
             ])
+            
+            
+            let tapStatus = UITapGestureRecognizer(target: self, action: #selector(didTapStatusChanger))
+            checkImg.addGestureRecognizer(tapStatus)
+            checkImg.isUserInteractionEnabled = true
         }
+
+    }
+    
+    @objc func didTapStatusChanger() {
+
+        print(selectedOccurrence.state)
+
+
+        let pathToChangeState = REF_OCCURRENCES.child(selectedOccurrence.ref)
+
+        let statusUpdate = ["observation": self.observationField.text ?? "Sem observações.", "state": !selectedOccurrence.state] as [String : Any]
+        selectedOccurrence.state = !selectedOccurrence.state
+
+        pathToChangeState.updateChildValues(statusUpdate)
+
+        print("ended")
+        print(selectedOccurrence.state)
         
-//        let url = URL(string: occu)
-//        reportImage.setImage(with: occurrence.set)
+        configureStateField()
+                
+    }
+    
+    private func configureStateField() {
+        stateField.text = selectedOccurrence.state ? "Resolvido!" : "Em aberto..."
+        stateField.textColor = selectedOccurrence.state ? .green : .red
         
+        
+        checkImg.tintColor = selectedOccurrence.state ? .green : .red
+        checkImg.image = selectedOccurrence.state ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "xmark.circle.fill")
+        
+//        checkImg = selectedOccurrence.state ? UIImageView(image: UIImage(systemName: "checkmark.circle.fill")?.withTintColor(UIColor.green)) : UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(UIColor.red))
     }
 }
