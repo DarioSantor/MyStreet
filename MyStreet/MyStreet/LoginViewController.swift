@@ -11,8 +11,7 @@ import Firebase
 class LoginViewController: UIViewController {
     
     private let logo = UIImageView(image: UIImage(named: "logo"))
-    
-    var isUserAdmin: Bool = false
+
     private let emailLoginField = CustomTextField(fieldType: .email)
     private let passwordLoginField = CustomTextField(fieldType: .password)
     private let loginButton = CustomButton(title: "LOGIN", bgColor: .systemGreen)
@@ -143,9 +142,10 @@ class LoginViewController: UIViewController {
             
             if uid == ADMIN_UID {
                 self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
+                isUserAdmin = true
                 return
             }
-            self.navigationController?.pushViewController(self.isUserAdmin ? UserMenuViewController() : UserMenuViewController(), animated: true)
+            self.navigationController?.pushViewController( UserMenuViewController(), animated: true)
         }
 
     }
