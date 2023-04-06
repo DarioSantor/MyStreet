@@ -16,7 +16,6 @@ class UserMenuViewController: UIViewController {
         navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.backButtonTitle = ""
 
-        
         let logo = UIImageView(image: UIImage(named: "logo"))
         logo.translatesAutoresizingMaskIntoConstraints = false
         

@@ -11,9 +11,28 @@ class OccurrenceUserListViewController: UIViewController {
     
     private let occurrenceTableView = UITableView()
     let occurrenceService = OccurrenceService()
-    var occurrencesToDisplay: [Occurrence] = []
+    var occurrencesToDisplay: [Occurrence] = [] {
+        didSet {
+            if !occurrencesToDisplay.isEmpty {
+                filterOcc()
+            }
+        }
+    }
+    var userOccurrencies: [Occurrence] = []
+    
+    private func filterOcc() {
+//        userOccurrencies = occurrencesToDisplay.filter( $0.userUID == UserDefaults.standard.string(forKey: "myUID"))
+        
+        for occ in occurrencesToDisplay {
+            if occ.userUID == UserDefaults.standard.string(forKey: "myUID") {
+                userOccurrencies.append(occ)
+            }
+        }
+        occurrenceTableView.reloadData()
+    }
 
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,9 +56,8 @@ class OccurrenceUserListViewController: UIViewController {
         DispatchQueue.main.async {
                 self.occurrenceService.getOccurrencesFromDatabase { occurrences in
                     self.occurrencesToDisplay = occurrences
-                    self.occurrenceTableView.reloadData()
+//                    self.occurrenceTableView.reloadData()
                     print("table reloaded")
-                    print(self.occurrencesToDisplay)
                 }
             }
     }
@@ -58,20 +76,20 @@ extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if occurrencesToDisplay.isEmpty {
-            let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                self.navigationController?.popViewController(animated: true)
-            }
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        }
-        return occurrencesToDisplay.count
+//        if occurrencesToDisplay.isEmpty {
+//            let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//        }
+        return userOccurrencies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
-        cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
+        cell.configure(occurrence: userOccurrencies[indexPath.row])
         return cell
     }
 }
