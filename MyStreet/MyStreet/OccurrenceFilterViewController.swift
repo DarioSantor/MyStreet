@@ -66,11 +66,18 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
                     print(occ.title)
                 }
             }
+            if occurrencesFiltered.isEmpty {
+                let alertController = UIAlertController(title: "Não foram encontradas ocurrências", message: "Não existem ocurrências com estes filtros.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+            }
             return filterOccurrences
         default:
             return occurrences
         }
     }
+
     
 
     
@@ -178,6 +185,8 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
             
             let filteredOccVC = OccurrenceFilteredViewController(filteredOccurrences: self.occurrencesFiltered)
             filteredOccVC.setTitle(title: filterTitles)
+            
+            
             self.navigationController?.pushViewController(filteredOccVC, animated: true)
         }
         
