@@ -43,7 +43,7 @@ class OcurrenceDetailViewController: UIViewController {
         navigationItem.title = "Ver Ocorrências"
         let customCell = CustomOcurrencetableViewCellTableViewCell()
         customCell.configure(occurrence: selectedOccurrence)
-        let checkImg = UIImageView(image: UIImage(named:"checkmark"))
+        let checkImg = UIImageView(image: UIImage(systemName:"checkmark.circle.fill"))
 
         checkImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
         checkImg.backgroundColor = .secondarySystemBackground
@@ -103,7 +103,7 @@ class OcurrenceDetailViewController: UIViewController {
             observationField.heightAnchor.constraint(equalToConstant: 40),
             
         ])
-        var checkUserType = LoginViewController()
+        let checkUserType = LoginViewController()
         if !checkUserType.isUserAdmin {
             view.addSubview(stateField)
             stateField.translatesAutoresizingMaskIntoConstraints = false
