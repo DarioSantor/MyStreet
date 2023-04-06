@@ -104,7 +104,7 @@ class OcurrenceDetailViewController: UIViewController {
             
         ])
         var checkUserType = LoginViewController()
-        if checkUserType.isUserAdmin {
+        if !checkUserType.isUserAdmin {
             view.addSubview(stateField)
             stateField.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(checkImg)

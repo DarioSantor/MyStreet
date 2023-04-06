@@ -25,6 +25,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     let reportImage = UIImageView(image: UIImage(systemName: "camera"))
     var hasRequestedAuthorization = false
     private var keyboardHeight: CGFloat = 0.0
+    let observation = ""
+    let state: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +100,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                   let type = self.buttonText,
                   let description = self.reportDescriptonField.text,
                   let imageToCompress = self.reportImage.image?.jpegData(compressionQuality: 0.5),
-                  let currentUserUID = UserDefaults.standard.string(forKey: "myUID") else {
+                  let currentUserUID = UserDefaults.standard.string(forKey: "myUID")
+            else {
                 print("early exit")
                 return
             }
@@ -117,7 +120,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                         } else {
                             guard let imageUrl = url else { return }
                             let newReportRef = REF_OCCURRENCES.childByAutoId()
-                            let values = ["ref": newReportRef.key, "latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString]
+                            let values = ["ref": newReportRef.key, "latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString, "observation": self.observation, "state": self.state]
 
                             // Store the report data in Firebase Realtime Database
                             
@@ -127,6 +130,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                                 } else {
                                     print("DEBUG - new report ref \(newReportRef.key!)")
                                     print("DEBUG - ref \(ref)")
+                                    print("DEBUG - state \(self.state)")
                                     print("Successfully added new report")
                                     self.navigationController?.pushViewController(ConfirmationViewController(), animated: true)
                                 }

@@ -20,6 +20,8 @@ struct Occurrence: Codable {
     let description: String
     let imageUrl: String?
     let userUID: String
+    let observation: String
+    var state: Bool
 }
 
 struct OccurrenceList: Codable {
