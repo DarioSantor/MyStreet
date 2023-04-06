@@ -26,7 +26,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     var hasRequestedAuthorization = false
     private var keyboardHeight: CGFloat = 0.0
     let observation = ""
-    let state: Bool = false
+    let state: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()

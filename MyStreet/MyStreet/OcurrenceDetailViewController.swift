@@ -110,7 +110,7 @@ class OcurrenceDetailViewController: UIViewController {
             
         ])
         let checkUserType = LoginViewController()
-        if !checkUserType.isUserAdmin {
+        if checkUserType.isUserAdmin {
             view.addSubview(stateField)
             stateField.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(checkImg)
@@ -154,12 +154,12 @@ class OcurrenceDetailViewController: UIViewController {
     }
     
     private func configureStateField() {
-        stateField.text = selectedOccurrence.state ? "Resolvido!" : "Em aberto..."
-        stateField.textColor = selectedOccurrence.state ? .green : .red
+        stateField.text = selectedOccurrence.state ? "Em aberto..." : "Resolvido!"
+        stateField.textColor = selectedOccurrence.state ? .red : .green
         
         
-        checkImg.tintColor = selectedOccurrence.state ? .green : .red
-        checkImg.image = selectedOccurrence.state ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "xmark.circle.fill")
+        checkImg.tintColor = selectedOccurrence.state ? .red : .green
+        checkImg.image = selectedOccurrence.state ? UIImage(systemName: "xmark.circle.fill") : UIImage(systemName: "checkmark.circle.fill")
         
 //        checkImg = selectedOccurrence.state ? UIImageView(image: UIImage(systemName: "checkmark.circle.fill")?.withTintColor(UIColor.green)) : UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(UIColor.red))
     }
