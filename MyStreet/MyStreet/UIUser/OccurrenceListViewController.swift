@@ -83,6 +83,7 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
         cell.configure(occurrence: occurrencesToDisplay[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let occurrence = occurrencesToDisplay[indexPath.row]
         let detailVC = OcurrenceDetailViewController(selectedOccurrence: occurrence)

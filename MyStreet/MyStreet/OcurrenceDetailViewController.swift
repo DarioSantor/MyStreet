@@ -35,6 +35,7 @@ class OcurrenceDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationItem.title = "Ver Ocorrências"
+
         let customCell = CustomOcurrencetableViewCellTableViewCell()
         customCell.configure(occurrence: selectedOccurrence)
         
@@ -96,6 +97,7 @@ class OcurrenceDetailViewController: UIViewController {
             
         ])
         if isUserAdmin {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapDelete))
             view.addSubview(stateField)
             stateField.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(checkImg)
@@ -127,6 +129,13 @@ class OcurrenceDetailViewController: UIViewController {
         print("ended")
         print(selectedOccurrence.state)
         configureStateField()
+    }
+    
+    @objc func didTapDelete() {
+        let pathToChangeState = REF_OCCURRENCES.child(selectedOccurrence.ref)
+        pathToChangeState.removeValue()
+        self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
+        print("FOMOS ROUBADOS - GLORIOSO SLB")
     }
     
     private func configureStateField() {

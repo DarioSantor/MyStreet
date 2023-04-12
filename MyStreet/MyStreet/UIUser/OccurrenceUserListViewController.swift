@@ -47,6 +47,7 @@ class OccurrenceUserListViewController: UIViewController {
         
         occurrenceTableView.translatesAutoresizingMaskIntoConstraints = false
         occurrenceTableView.showsVerticalScrollIndicator = false
+        occurrenceTableView.separatorStyle = .none
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
             occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

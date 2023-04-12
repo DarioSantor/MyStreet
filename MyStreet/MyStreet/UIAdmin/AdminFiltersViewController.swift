@@ -112,6 +112,9 @@ class AdminFiltersViewController: UIViewController, CLLocationManagerDelegate {
         
 
         super.init(nibName: nil, bundle: nil)
+        
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.backButtonTitle = ""
         getOccurrences()
         // MARK: - GET LOCATION
         locationManager = CLLocationManager()
@@ -206,7 +209,7 @@ class AdminFiltersViewController: UIViewController, CLLocationManagerDelegate {
                 self.stateFilter = .none
             }
             
-            let filterTitles = "\(self.typeFilter.rawValue) \t \(self.distanceFilter.rawValue) \t \(self.stateFilter.rawValue)"
+//            let filterTitles = "\(self.typeFilter.rawValue) \t \(self.distanceFilter.rawValue) \t \(self.stateFilter.rawValue)"
 
 
             // TODO: - EXECUTE FILTER
