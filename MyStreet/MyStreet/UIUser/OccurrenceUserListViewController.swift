@@ -89,7 +89,14 @@ extension OccurrenceUserListViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: CustomOcurrencetableViewCellTableViewCell.identifier, for: indexPath) as! CustomOcurrencetableViewCellTableViewCell)
+        cell.selectionStyle = .none
         cell.configure(occurrence: userOccurrencies[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let occurrence = userOccurrencies[indexPath.row]
+        let detailVC = OcurrenceDetailViewController(selectedOccurrence: occurrence)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

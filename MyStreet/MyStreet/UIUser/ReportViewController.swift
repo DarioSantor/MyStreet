@@ -120,7 +120,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
                         } else {
                             guard let imageUrl = url else { return }
                             let newReportRef = REF_OCCURRENCES.childByAutoId()
-                            let values = ["ref": newReportRef.key, "latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString, "observation": self.observation, "state": self.state]
+                            let values = ["ref": newReportRef.key!, "latitude": latitude, "longitude": longitude, "location": location, "title": title, "type": type, "description": description, "userUID": currentUserUID, "imageUrl": imageUrl.absoluteString, "observation": self.observation, "state": self.state] as [String : Any]
 
                             // Store the report data in Firebase Realtime Database
                             

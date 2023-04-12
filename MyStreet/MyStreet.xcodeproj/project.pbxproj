@@ -155,6 +155,29 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		75F2442429E6A254001572F5 /* UIUser */ = {
+			isa = PBXGroup;
+			children = (
+				A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */,
+				F20E17F129C8CA290068B704 /* UserMenuViewController.swift */,
+				A4DCD64929CB761E007424F2 /* ReportViewController.swift */,
+				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
+				2C4D113429CF7C4600C485A6 /* OccurrenceUserListViewController.swift */,
+			);
+			path = UIUser;
+			sourceTree = "<group>";
+		};
+		75F2442529E6A2C1001572F5 /* UIAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
+				F252F45E29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift */,
+				F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */,
+				F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */,
+			);
+			path = UIAdmin;
+			sourceTree = "<group>";
+		};
 		F20E183229C929890068B704 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,25 +205,18 @@
 		F2EA989429BF990300AF7ECC /* MyStreet */ = {
 			isa = PBXGroup;
 			children = (
-				750CD9AE29D8A32900631C25 /* Model */,
-				F20E183229C929890068B704 /* Utils */,
 				2CA84FE529C63A5B006A0341 /* LocalizationAuthViewController.swift */,
 				2CA84FE729C63A5C006A0341 /* LoginViewController.swift */,
-				A4DCD63B29C89F57007424F2 /* RegisterViewController.swift */,
-				F20E17F129C8CA290068B704 /* UserMenuViewController.swift */,
-				A4DCD64929CB761E007424F2 /* ReportViewController.swift */,
-				F20E17F329C8EEBE0068B704 /* ConfirmationViewController.swift */,
+				75F2442429E6A254001572F5 /* UIUser */,
+				75F2442529E6A2C1001572F5 /* UIAdmin */,
+				750CD9AE29D8A32900631C25 /* Model */,
+				F20E183229C929890068B704 /* Utils */,
 				2C0AB64929C8CAED006B276E /* OccurrenceListViewController.swift */,
 				A455321E29CE702300B7AE95 /* OcurrenceDetailViewController.swift */,
-				2C4D113429CF7C4600C485A6 /* OccurrenceUserListViewController.swift */,
 				F20E184C29CB952D0068B704 /* OccurrenceFilterViewController.swift */,
 				2C4D113829CF7F7E00C485A6 /* OcurrenceFilteredViewController.swift */,
 				F252F45829CCE4330050183F /* OccurrenceTypeFilterViewControllerModal.swift */,
 				F252F45C29CD159B0050183F /* OccurrenceRadiusFilterViewControllerModal.swift */,
-				F20E183829C9A8CF0068B704 /* AdminFiltersViewController.swift */,
-				F252F45E29CD1C960050183F /* OccurrenceTypeFilterAdminViewControllerModal.swift */,
-				F252F46029CD1D8B0050183F /* OccurrenceRadiusFilterAdminViewControllerModal.swift */,
-				F252F46229CD1E8F0050183F /* OccurrenceStatusFilterAdminViewControllerModal.swift */,
 				2CE26F7029C7CBA700A49ABB /* CustomElements */,
 				F2EA989529BF990300AF7ECC /* AppDelegate.swift */,
 				F2EA989729BF990300AF7ECC /* SceneDelegate.swift */,
