@@ -12,7 +12,7 @@ import Kingfisher
 class OcurrenceDetailViewController: UIViewController {
     private var stateField = UILabel()
     private let observationField = CustomTextField(fieldType: .reportObservation)
-    private let descriptonField = UILabel()
+    private let descriptonField = UITextView()
     private var reportImage = UIImageView(image: UIImage())
     private var selectedOccurrence: Occurrence
     private var checkImg = UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(.red))
@@ -49,6 +49,7 @@ class OcurrenceDetailViewController: UIViewController {
         descriptonField.text = selectedOccurrence.description
         descriptonField.textColor = UIColor.lightGray
         descriptonField.layer.cornerRadius = 8
+        descriptonField.isEditable = false
         
         stateField.textAlignment = .center
         stateField.textColor = UIColor.lightGray
@@ -64,7 +65,6 @@ class OcurrenceDetailViewController: UIViewController {
         let items = [
             descriptonField,
             reportImage,
-            observationField,
             customCell,
         ]
         
@@ -90,14 +90,11 @@ class OcurrenceDetailViewController: UIViewController {
             reportImage.heightAnchor.constraint(equalToConstant: 200),
             reportImage.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
             
-            observationField.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
-            observationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-            observationField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-            observationField.heightAnchor.constraint(equalToConstant: 40),
-            
         ])
         if isUserAdmin {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapDelete))
+            view.addSubview(observationField)
+            observationField.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(stateField)
             stateField.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(checkImg)
@@ -111,6 +108,10 @@ class OcurrenceDetailViewController: UIViewController {
                 stateField.heightAnchor.constraint(equalTo: checkImg.heightAnchor),
                 stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
                 stateField.trailingAnchor.constraint(equalTo: checkImg.trailingAnchor),
+                observationField.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
+                observationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+                observationField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
+                observationField.heightAnchor.constraint(equalToConstant: 40),
             ])
             
             let tapStatus = UITapGestureRecognizer(target: self, action: #selector(didTapStatusChanger))
@@ -126,7 +127,6 @@ class OcurrenceDetailViewController: UIViewController {
         let statusUpdate = ["observation": self.observationField.text ?? "Sem observações.", "state": !selectedOccurrence.state] as [String : Any]
         selectedOccurrence.state = !selectedOccurrence.state
         pathToChangeState.updateChildValues(statusUpdate)
-        print("ended")
         print(selectedOccurrence.state)
         configureStateField()
     }
@@ -135,7 +135,6 @@ class OcurrenceDetailViewController: UIViewController {
         let pathToChangeState = REF_OCCURRENCES.child(selectedOccurrence.ref)
         pathToChangeState.removeValue()
         self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
-        print("FOMOS ROUBADOS - GLORIOSO SLB")
     }
     
     private func configureStateField() {

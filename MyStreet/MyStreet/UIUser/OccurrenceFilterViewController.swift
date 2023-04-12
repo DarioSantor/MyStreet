@@ -151,24 +151,24 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
             }
             
             switch self.setRadiusButton.currentTitle! {
-            case "500 metros":
+            case "< 500 metros":
                 self.distanceFilter = .distance500
-            case "1 Kilómetro":
+            case "< 1 Kilómetro":
                 self.distanceFilter = .distance1000
-            case "2 Kilómetros":
+            case "< 2 Kilómetros":
                 self.distanceFilter = .distance2000
-            case "5 Kilómetros":
+            case "< 5 Kilómetros":
                 self.distanceFilter = .distance5000
-            case "10 Kilómetros":
+            case "< 10 Kilómetros":
                 self.distanceFilter = .distance10000
             default:
                 self.distanceFilter = .none
             }
-            
-            
-            
-            let filterTitles = "\(self.typeFilter.rawValue) \t \(self.distanceFilter.rawValue)"
-            
+            var filterTitles = ""
+            if self.distanceFilter != .none {
+                filterTitles = "\(self.typeFilter.rawValue) \t <\(self.distanceFilter.rawValue) mt"
+            }
+
             // TODO: - EXECUTE FILTER
             self.occurrencesFiltered = self.filterOccurrencesType(from: self.occurrencesToFilter)
             

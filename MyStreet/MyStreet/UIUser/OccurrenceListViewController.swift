@@ -16,8 +16,6 @@ class OccurrenceListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        occurrencesToDisplay = OccurrenceService.occurrences
-//        print("DDDDDDD\(occurrencesToDisplay)")
         view.backgroundColor = .systemBackground
         
         navigationItem.title = "Ver Ocorrências"
