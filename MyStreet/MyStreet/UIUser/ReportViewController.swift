@@ -209,6 +209,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         mapViewController.completionHandler = { [weak self] location in
             self?.userLocation = location
 //            self?.updateLocationTextField()
+            self!.locationManager.stopUpdatingLocation()
+
             print("FFFFFF - \(location)")
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
