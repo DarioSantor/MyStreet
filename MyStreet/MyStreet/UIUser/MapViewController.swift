@@ -8,17 +8,15 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     var userLocation: CLLocation?
     var completionHandler: ((CLLocation) -> Void)?
-
     private let mapView = MKMapView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        mapView.showsUserLocation = true
+//        mapView.showsUserLocation = true
         mapView.delegate = self
 
         view.addSubview(mapView)
