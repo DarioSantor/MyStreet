@@ -210,6 +210,24 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
             self?.userLocation = location
 //            self?.updateLocationTextField()
             print("FFFFFF - \(location)")
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                if (error != nil){
+                    print("error in reverseGeocode")
+                }
+                let placemark = placemarks! as [CLPlacemark]
+                if placemark.count>0{
+                    let placemark = placemarks![0]
+                    print(placemark.subLocality!)
+                    print(placemark.postalCode!)
+                    print(placemark.locality!)
+                    print(placemark.administrativeArea!)
+                    print(placemark.country!)
+                    DispatchQueue.main.async {
+                        self!.reportLocationField.text = placemark.postalCode!
+                    }
+                }
+            }
             self?.dismiss(animated: true, completion: nil)
         }
 
