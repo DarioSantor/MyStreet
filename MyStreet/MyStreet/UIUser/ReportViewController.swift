@@ -16,7 +16,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     
     private var occurrenceLatitude: String?
     private var occurrenceLongitude: String?
-    
+    var userLocation: CLLocation?
     
     var setTypeButton = UIButton(frame: .zero)
     private let reportDescriptonField = UITextView()
@@ -203,8 +203,19 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     }
     
     @objc func locationImageTapped() {
-        // TODO: Pick location in a map
+        let mapViewController = MapViewController()
+        mapViewController.userLocation = userLocation
+
+        mapViewController.completionHandler = { [weak self] location in
+            self?.userLocation = location
+//            self?.updateLocationTextField()
+            print("FFFFFF - \(location)")
+            self?.dismiss(animated: true, completion: nil)
+        }
+
+        present(mapViewController, animated: true, completion: nil)
     }
+
     
     @objc func reportImageTapped() {
         let imagePickerController = UIImagePickerController()
