@@ -41,6 +41,18 @@ class OccurrenceUserListViewController: UIViewController {
         occurrenceTableView.reloadData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DispatchQueue.main.async {
+            self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
+                self.userOccurrencies.removeAll()
+                self.occurrencesToDisplay = occurrences
+                self.occurrenceTableView.reloadData()
+                print("table reloaded")
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -67,12 +79,12 @@ class OccurrenceUserListViewController: UIViewController {
             occurrenceTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),     occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         DispatchQueue.main.async {
-                self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
-                    self.occurrencesToDisplay = occurrences
-                    self.occurrenceTableView.reloadData()
-                    print("table reloaded")
-                }
+            self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
+                self.occurrencesToDisplay = occurrences
+                self.occurrenceTableView.reloadData()
+                print("table reloaded")
             }
+        }
     }
     
 //    @objc func didTapFilters() {

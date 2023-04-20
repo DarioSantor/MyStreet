@@ -118,6 +118,10 @@ class OcurrenceDetailViewController: UIViewController {
             checkImg.addGestureRecognizer(tapStatus)
             checkImg.isUserInteractionEnabled = true
         }
+        
+        else if self.selectedOccurrence.userUID == UserDefaults.standard.string(forKey: "myUID") {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(userDidTapDelete))
+        }
     }
     
     @objc func didTapStatusChanger() {
@@ -135,6 +139,12 @@ class OcurrenceDetailViewController: UIViewController {
         let pathToChangeState = REF_OCCURRENCES.child(selectedOccurrence.ref)
         pathToChangeState.removeValue()
         self.navigationController?.pushViewController(AdminFiltersViewController(), animated: true)
+    }
+    
+    @objc func userDidTapDelete() {
+        let pathToChangeState = REF_OCCURRENCES.child(selectedOccurrence.ref)
+        pathToChangeState.removeValue()
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func configureStateField() {
