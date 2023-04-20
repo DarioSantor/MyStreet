@@ -46,6 +46,9 @@ class OccurrenceUserListViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Minhas Ocorrências"
+        navigationItem.backButtonTitle = ""
+
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: self, action: #selector(didTapFilters))
         
         occurrenceTableView.delegate = self
@@ -59,9 +62,8 @@ class OccurrenceUserListViewController: UIViewController {
         occurrenceTableView.separatorStyle = .none
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
-            occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            occurrenceTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            occurrenceTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),     occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         DispatchQueue.main.async {
                 self.occurrenceService.getOccurrencesFromDatabase { occurrences,isEmpty in

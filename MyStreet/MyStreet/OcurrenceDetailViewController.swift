@@ -12,7 +12,7 @@ import Kingfisher
 class OcurrenceDetailViewController: UIViewController {
     private var stateField = UILabel()
     private let observationField = CustomTextField(fieldType: .reportObservation)
-    private let descriptonField = UITextView()
+    private let descriptionField = UITextView()
     private var reportImage = UIImageView(image: UIImage())
     private var selectedOccurrence: Occurrence
     private var checkImg = UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(.red))
@@ -43,13 +43,13 @@ class OcurrenceDetailViewController: UIViewController {
         checkImg.backgroundColor = .secondarySystemBackground
         checkImg.layer.cornerRadius = 8
         
-        descriptonField.backgroundColor = .secondarySystemBackground
-        descriptonField.font = UIFont.systemFont(ofSize: 20)
-        descriptonField.text = " Descrição"
-        descriptonField.text = selectedOccurrence.description
-        descriptonField.textColor = UIColor.lightGray
-        descriptonField.layer.cornerRadius = 8
-        descriptonField.isEditable = false
+        descriptionField.backgroundColor = .secondarySystemBackground
+        descriptionField.font = UIFont.systemFont(ofSize: 20)
+        descriptionField.text = " Descrição"
+        descriptionField.text = selectedOccurrence.description
+        descriptionField.textColor = .label
+        descriptionField.layer.cornerRadius = 8
+        descriptionField.isEditable = false
         
         stateField.textAlignment = .center
         stateField.textColor = UIColor.lightGray
@@ -63,7 +63,7 @@ class OcurrenceDetailViewController: UIViewController {
         reportImage.contentMode = .scaleAspectFit
         
         let items = [
-            descriptonField,
+            descriptionField,
             reportImage,
             customCell,
         ]
@@ -76,19 +76,19 @@ class OcurrenceDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             
             customCell.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:20),
-            customCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            customCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            customCell.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:20),
+            customCell.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:-20),
             customCell.heightAnchor.constraint(equalToConstant: 120),
             
-            descriptonField.topAnchor.constraint(equalTo: customCell.bottomAnchor,constant:20),
-            descriptonField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-            descriptonField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
-            descriptonField.heightAnchor.constraint(equalToConstant:200),
+            descriptionField.topAnchor.constraint(equalTo: customCell.bottomAnchor,constant:20),
+            descriptionField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant:20),
+            descriptionField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant:-20),
+            descriptionField.heightAnchor.constraint(equalToConstant:200),
             
-            reportImage.topAnchor.constraint(equalTo: descriptonField.bottomAnchor,constant:20),
-            reportImage.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+            reportImage.topAnchor.constraint(equalTo: descriptionField.bottomAnchor,constant:20),
+            reportImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant:20),
             reportImage.heightAnchor.constraint(equalToConstant: 200),
-            reportImage.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
+            reportImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant:-20),
             
         ])
         if isUserAdmin {

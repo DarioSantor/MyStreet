@@ -38,10 +38,10 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         
         topView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        topView.layer.cornerRadius = 14
+        topView.layer.cornerRadius = 8
         topView.backgroundColor = .gray
         bottomView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        bottomView.layer.cornerRadius = 14
+        bottomView.layer.cornerRadius = 8
         bottomView.backgroundColor = .secondarySystemBackground
         
         
@@ -52,13 +52,18 @@ class CustomOcurrencetableViewCellTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            topView.widthAnchor.constraint(equalToConstant: 320),
-            topView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            topView.widthAnchor.constraint(equalToConstant: 320),
+//            topView.centerXAnchor.constraint(equalTo: centerXAnchor),
+
+            topView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             topView.bottomAnchor.constraint(equalTo: centerYAnchor),
             
             bottomView.topAnchor.constraint(equalTo: centerYAnchor),
-            bottomView.widthAnchor.constraint(equalToConstant: 320),
-            bottomView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bottomView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            bottomView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+//            bottomView.widthAnchor.constraint(equalToConstant: 320),
+//            bottomView.centerXAnchor.constraint(equalTo: centerXAnchor),
             bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 12),

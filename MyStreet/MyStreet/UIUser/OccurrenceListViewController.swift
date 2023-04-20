@@ -35,7 +35,8 @@ class OccurrenceListViewController: UIViewController {
         NSLayoutConstraint.activate([
             occurrenceTableView.topAnchor.constraint(equalTo: view.topAnchor),
             occurrenceTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            occurrenceTableView.widthAnchor.constraint(equalToConstant: 320),
+            occurrenceTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            occurrenceTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
