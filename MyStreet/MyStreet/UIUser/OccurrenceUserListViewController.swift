@@ -15,6 +15,15 @@ class OccurrenceUserListViewController: UIViewController {
         didSet {
             if !occurrencesToDisplay.isEmpty {
                 filterOcc()
+                if userOccurrencies.isEmpty {
+                    let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+
+                }
             }
         }
     }
@@ -58,17 +67,7 @@ class OccurrenceUserListViewController: UIViewController {
             occurrenceTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),     occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         DispatchQueue.main.async {
-                self.occurrenceService.getOccurrencesFromDatabase { occurrences,isEmpty in
-                    print("\(self.occurrencesToDisplay.count)")
-                    if self.occurrencesToDisplay.isEmpty {
-                        let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-
-                    }
+                self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
                     self.occurrencesToDisplay = occurrences
                     self.occurrenceTableView.reloadData()
                     print("table reloaded")
