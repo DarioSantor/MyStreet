@@ -41,7 +41,7 @@ class OccurrenceService {
     }
     
     // MARK: - func to get all Occurrences at FireBase
-    public func getOccurrencesFromDatabase(completionHandler: @escaping ([Occurrence], _ isEmpty: Bool) -> Void) {
+    public func getOccurrencesFromDatabase(completionHandler: @escaping ([Occurrence], Bool) -> Void) {
         REF_OCCURRENCES.observeSingleEvent(of: .value) { (snapshot) in
             var occurrences = [Occurrence]()
             guard let snapshotValue = snapshot.value as? [String: Any] else {
@@ -66,11 +66,9 @@ class OccurrenceService {
                 }
             }
             
-            if occurrences.isEmpty {
-                completionHandler([], true)
-            } else {
-                completionHandler(occurrences, false)
-            }
+            
+            completionHandler(occurrences, occurrences.isEmpty)
+            
         }
     }
 }
