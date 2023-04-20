@@ -44,11 +44,11 @@ class OccurrenceRadiusFilterViewControllerModal: UIViewController {
             self.dismiss(animated: true)
         }
         
-        distance500Button = makeTypeButtons(type: "500 metros")
-        distance1kButton = makeTypeButtons(type: "1 Kilómetro")
-        distance2kButton = makeTypeButtons(type: "2 Kilómetros")
-        distance5kButton = makeTypeButtons(type: "5 Kilómetros")
-        distance10kButton = makeTypeButtons(type: "10 Kilómetros")
+        distance500Button = makeTypeButtons(type: "< 500 metros")
+        distance1kButton = makeTypeButtons(type: "< 1 Kilómetro")
+        distance2kButton = makeTypeButtons(type: "< 2 Kilómetros")
+        distance5kButton = makeTypeButtons(type: "< 5 Kilómetros")
+        distance10kButton = makeTypeButtons(type: "< 10 Kilómetros")
         
         let image = UIImage(systemName: "xmark.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         

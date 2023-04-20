@@ -207,7 +207,8 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         mapViewController.userLocation = userLocation
 
         mapViewController.completionHandler = { [weak self] location in
-            self?.userLocation = location
+            self?.occurrenceLatitude = String(format: "%f", location.coordinate.latitude)
+            self?.occurrenceLongitude = String(format: "%f", location.coordinate.longitude)
             self!.locationManager.stopUpdatingLocation()
 
             print("FFFFFF - \(location)")

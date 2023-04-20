@@ -61,10 +61,11 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
             //filtrar
             var filterOccurrences: [Occurrence] = []
             for occ in self.occurrencesFiltered {
-                let point = CLLocation(latitude: Double(occ.latitude)!, longitude: Double(occ.longitude)!)
-                if point.distance(from: userCurrentLocation!) < Double(distanceFilter.rawValue)! {
+                let occPoint = CLLocation(latitude: Double(occ.latitude)!, longitude: Double(occ.longitude)!)
+                if occPoint.distance(from: userCurrentLocation!) < Double(distanceFilter.rawValue)! {
                     filterOccurrences.append(occ)
-                    print(occ.title)
+                    print("DEBUG - occPointDistance - \(occPoint.distance(from: userCurrentLocation!))")
+                    print("DEBUG - occPointName - \(occ.title)\n")
                 }
             }
 //            reportAlert()
@@ -166,7 +167,7 @@ class OccurrenceFilterViewController: UIViewController, CLLocationManagerDelegat
             }
             var filterTitles = ""
             if self.distanceFilter != .none {
-                filterTitles = "\(self.typeFilter.rawValue) \t <\(self.distanceFilter.rawValue) mt"
+                filterTitles = "\(self.typeFilter.rawValue) \t < \(self.distanceFilter.rawValue) mt"
             }
 
             // TODO: - EXECUTE FILTER
