@@ -16,6 +16,14 @@ class OccurrenceUserListViewController: UIViewController {
             if !occurrencesToDisplay.isEmpty {
                 filterOcc()
             }
+            if occurrencesToDisplay.isEmpty {
+                        let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        alertController.addAction(okAction)
+                        present(alertController, animated: true, completion: nil)
+                    }
         }
     }
     var userOccurrencies: [Occurrence] = []
@@ -27,6 +35,7 @@ class OccurrenceUserListViewController: UIViewController {
             if occ.userUID == UserDefaults.standard.string(forKey: "myUID") {
                 userOccurrencies.append(occ)
             }
+          
         }
         occurrenceTableView.reloadData()
     }
@@ -55,7 +64,7 @@ class OccurrenceUserListViewController: UIViewController {
             occurrenceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         DispatchQueue.main.async {
-                self.occurrenceService.getOccurrencesFromDatabase { occurrences in
+                self.occurrenceService.getOccurrencesFromDatabase { occurrences,isEmpty in
                     self.occurrencesToDisplay = occurrences
 //                    self.occurrenceTableView.reloadData()
                     print("table reloaded")

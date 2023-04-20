@@ -101,7 +101,7 @@ class AdminFiltersViewController: UIViewController, CLLocationManagerDelegate {
     
     func getOccurrences() {
         DispatchQueue.main.async {
-                self.occurrenceService.getOccurrencesFromDatabase { occurrences in
+                self.occurrenceService.getOccurrencesFromDatabase { occurrences,isEmpty in
                     self.occurrencesToFilter = occurrences
                     print("table reloaded")
                 }

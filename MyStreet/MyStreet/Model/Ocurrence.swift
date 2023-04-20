@@ -33,7 +33,7 @@ class OccurrenceService {
     public static var occurrences: [Occurrence] = []
     
     init() {
-        getOccurrencesFromDatabase { occurrences in
+        getOccurrencesFromDatabase { occurrences, isEmpty in
             OccurrenceService.occurrences = occurrences
             print("got occurrences from database:")
             print(OccurrenceService.occurrences)
@@ -41,11 +41,12 @@ class OccurrenceService {
     }
     
     // MARK: - func to get all Occurrences at FireBase
-    public func getOccurrencesFromDatabase(completionHandler: @escaping ([Occurrence]) -> Void) {
+    public func getOccurrencesFromDatabase(completionHandler: @escaping ([Occurrence], _ isEmpty: Bool) -> Void) {
         REF_OCCURRENCES.observeSingleEvent(of: .value) { (snapshot) in
             var occurrences = [Occurrence]()
             guard let snapshotValue = snapshot.value as? [String: Any] else {
                 print("Snapshot value is nil")
+                completionHandler([], true)
                 return
             }
             
@@ -64,7 +65,12 @@ class OccurrenceService {
                     print("Error decoding occurrence: \(error.localizedDescription)")
                 }
             }
-            completionHandler(occurrences)
+            
+            if occurrences.isEmpty {
+                completionHandler([], true)
+            } else {
+                completionHandler(occurrences, false)
+            }
         }
     }
 }

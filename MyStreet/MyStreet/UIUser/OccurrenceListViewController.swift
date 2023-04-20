@@ -40,12 +40,21 @@ class OccurrenceListViewController: UIViewController {
         ])
         
         DispatchQueue.main.async {
-                self.occurrenceService.getOccurrencesFromDatabase { occurrences in
+            self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
+                if isEmpty {
+                    let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+
+                } else {
                     self.occurrencesToDisplay = occurrences
+                    print("occurrences loaded: \(self.occurrencesToDisplay.count)")
                     self.occurrenceTableView.reloadData()
-                    print("table reloaded")
-                    print(self.occurrencesToDisplay)
                 }
+            }
             }
     }
     
@@ -63,15 +72,6 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG - \(occurrencesToDisplay.count)")
-//        if occurrencesToDisplay.isEmpty {
-//            let alertController = UIAlertController(title: "Não foram encontradas ocorrências", message: "Não existem ocorrências", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            alertController.addAction(okAction)
-//            present(alertController, animated: true, completion: nil)
-//        }
-
         return occurrencesToDisplay.count
     }
     
@@ -91,5 +91,4 @@ extension OccurrenceListViewController: UITableViewDelegate, UITableViewDataSour
     
 
 }
-
    
