@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import Kingfisher
+import CoreLocation
 
 class OcurrenceDetailViewController: UIViewController {
     private var stateField = UILabel()
@@ -16,6 +17,7 @@ class OcurrenceDetailViewController: UIViewController {
     private var reportImage = UIImageView(image: UIImage())
     private var selectedOccurrence: Occurrence
     private var checkImg = UIImageView(image: UIImage(systemName: "xmark.circle.fill")?.withTintColor(.red))
+    private var mapImg = UIImageView(image: UIImage(systemName: "map.circle.fill")?.withTintColor(UIColor.black))
     
     init(selectedOccurrence: Occurrence) {
         self.selectedOccurrence = selectedOccurrence
@@ -43,6 +45,11 @@ class OcurrenceDetailViewController: UIViewController {
         checkImg.backgroundColor = .secondarySystemBackground
         checkImg.layer.cornerRadius = 8
         
+        mapImg.layer.borderColor = CGColor(gray: 10, alpha: 5)
+        mapImg.backgroundColor = .secondarySystemBackground
+        mapImg.layer.cornerRadius = 8
+        mapImg.tintColor = .black
+
         descriptionField.backgroundColor = .secondarySystemBackground
         descriptionField.font = UIFont.systemFont(ofSize: 20)
         descriptionField.text = " Descrição"
@@ -66,6 +73,7 @@ class OcurrenceDetailViewController: UIViewController {
             descriptionField,
             reportImage,
             customCell,
+            mapImg
         ]
         
         for item in items {
@@ -90,7 +98,17 @@ class OcurrenceDetailViewController: UIViewController {
             reportImage.heightAnchor.constraint(equalToConstant: 200),
             reportImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant:-20),
             
+            mapImg.topAnchor.constraint(equalTo: reportImage.bottomAnchor, constant: 20),
+            mapImg.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            mapImg.widthAnchor.constraint(equalToConstant: 40),
+            mapImg.heightAnchor.constraint(equalToConstant: 40),
+            
         ])
+
+        let tapMap = UITapGestureRecognizer(target: self, action: #selector(didTapMapChanger))
+        mapImg.addGestureRecognizer(tapMap)
+        mapImg.isUserInteractionEnabled = true
+        
         if isUserAdmin {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapDelete))
             view.addSubview(observationField)
@@ -104,12 +122,14 @@ class OcurrenceDetailViewController: UIViewController {
                 checkImg.trailingAnchor.constraint(equalTo: observationField.trailingAnchor),
                 checkImg.widthAnchor.constraint(equalToConstant: 40),
                 checkImg.heightAnchor.constraint(equalToConstant: 40),
+                
                 stateField.topAnchor.constraint(equalTo: observationField.bottomAnchor,constant:20),
                 stateField.heightAnchor.constraint(equalTo: checkImg.heightAnchor),
                 stateField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
-                stateField.trailingAnchor.constraint(equalTo: checkImg.trailingAnchor),
+                stateField.trailingAnchor.constraint(equalTo: checkImg.leadingAnchor),
+                
                 observationField.topAnchor.constraint(equalTo: reportImage.bottomAnchor,constant:20),
-                observationField.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:20),
+                observationField.leadingAnchor.constraint(equalTo: mapImg.trailingAnchor, constant:20),
                 observationField.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:-20),
                 observationField.heightAnchor.constraint(equalToConstant: 40),
             ])
@@ -133,6 +153,11 @@ class OcurrenceDetailViewController: UIViewController {
         pathToChangeState.updateChildValues(statusUpdate)
         print(selectedOccurrence.state)
         configureStateField()
+    }
+    
+    @objc func didTapMapChanger() {
+        let mapViewController = MapViewController(location: CLLocation(latitude: Double(selectedOccurrence.latitude) ?? 38.75286157642966, longitude: Double(selectedOccurrence.longitude) ?? -9.184752546055385))
+        present(mapViewController, animated: true, completion: nil)
     }
     
     @objc func didTapDelete() {

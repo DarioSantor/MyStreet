@@ -203,9 +203,9 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
     }
     
     @objc func locationImageTapped() {
-        let mapViewController = MapViewController()
-        mapViewController.userLocation = userLocation
-
+        print("DEBUG - ULRVC\(String(describing: userLocation))")
+        let mapViewController = MapViewController(location: userLocation ?? CLLocation(latitude: 38.75286157642966, longitude: -9.184752546055385))
+//        mapViewController.userLocation = userLocation
         mapViewController.completionHandler = { [weak self] location in
             self?.occurrenceLatitude = String(format: "%f", location.coordinate.latitude)
             self?.occurrenceLongitude = String(format: "%f", location.coordinate.longitude)
@@ -326,6 +326,7 @@ class ReportViewController: UIViewController, UITextViewDelegate, CLLocationMana
         print("user location \(location)")
         self.occurrenceLatitude = String(format: "%f", location.coordinate.latitude)
         self.occurrenceLongitude = String(format: "%f", location.coordinate.longitude)
+        self.userLocation = location
         
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
