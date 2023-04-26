@@ -21,13 +21,13 @@ class LocalizationAuthViewController: UIViewController {
         authWarning.text = "Esta aplicação necessita de aceder à sua localização. Autorize, por favor, premindo o botão \"AUTORIZAR\"."
         authWarning.textAlignment = .center
         authWarning.font = UIFont.systemFont(ofSize: 20.0)
-//        authWarning.textColor = UIColor(named: "myBlackColor")
         authWarning.textColor = .label
         authWarning.lineBreakMode = NSLineBreakMode.byWordWrapping
         authWarning.numberOfLines = 0
         
         let action = UIAction() {_ in
-            userHasAuth = true
+            // guardar este dados nos user preferences
+            localizationAuthorization = true
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
         
@@ -35,8 +35,9 @@ class LocalizationAuthViewController: UIViewController {
         localizationButton.translatesAutoresizingMaskIntoConstraints = false
         localizationButton.backgroundColor = .systemBlue
         localizationButton.setTitle("AUTORIZAR", for: .normal)
+        localizationButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         localizationButton.layer.cornerRadius = 8
-        localizationButton.setTitleColor(UIColor.white, for: .normal)
+        localizationButton.setTitleColor(UIColor.label, for: .normal)
         
         view.addSubview(logo)
         view.addSubview(authWarning)
