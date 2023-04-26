@@ -53,8 +53,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ])
 
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
