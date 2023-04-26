@@ -13,9 +13,19 @@ class OccurrenceListViewController: UIViewController {
     let occurrenceService = OccurrenceService()
     var occurrencesToDisplay: [Occurrence] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.occurrenceService.getOccurrencesFromDatabase { occurrences, isEmpty in
+                self.occurrencesToDisplay = occurrences
+                self.occurrenceTableView.reloadData()
+                print("table reloaded")
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         
         navigationItem.title = "Ver Ocorrências"
